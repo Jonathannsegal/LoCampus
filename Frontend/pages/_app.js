@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 import {
   ThemeProvider,
   CSSReset,
-  ColorModeProvider,
-} from "@chakra-ui/core";
-import { Global, css } from "@emotion/core";
-import theme from "../styles/theme";
+  ColorModeProvider
+} from '@chakra-ui/core'
+import { Global, css } from '@emotion/core'
+import theme from '../styles/theme'
 
 const GlobalStyle = ({ children }) => {
   return (
@@ -40,19 +40,19 @@ const GlobalStyle = ({ children }) => {
       />
       {children}
     </>
-  );
-};
+  )
+}
 
 const App = ({ Component, pageProps }) => {
   return (
     <ThemeProvider theme={theme}>
-        <ColorModeProvider value="light">
-          <GlobalStyle>
-            <Component {...pageProps} />
-          </GlobalStyle>
-        </ColorModeProvider>
+      <ColorModeProvider value="light">
+        <GlobalStyle>
+          <Component {...pageProps} />
+        </GlobalStyle>
+      </ColorModeProvider>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

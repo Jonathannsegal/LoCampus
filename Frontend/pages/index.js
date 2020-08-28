@@ -1,15 +1,10 @@
-import React from 'react'
-import {
-  Image,
-  Box
-} from '@chakra-ui/core'
+import React from 'react';
+import { Image, Box } from '@chakra-ui/core';
 
-const Index = () => {
-  return (
-    <Box size="md" m="auto">
-      <Image src="/images/logo_heads.png" alt="LoCampus" />
-    </Box>
-  )
-}
+const Index = () => (
+  <Box size="md" m="auto">
+    <Image src="/images/logo_heads.png" alt="LoCampus" />
+  </Box>
+);
 
-export default Index
+export default Index;

@@ -1,5 +1,5 @@
 import React from 'react';
-import NextLink from "next/link";
+import NextLink from 'next/link';
 import {
   Image,
   Box,
@@ -8,7 +8,7 @@ import {
   Input,
   FormHelperText,
   Button,
-  ButtonGroup
+  ButtonGroup,
 } from '@chakra-ui/core';
 
 const Index = () => (
@@ -50,36 +50,25 @@ const Index = () => (
           id="password"
           aria-describedby="password-helper-text"
         />
-        <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
+        <FormLabel htmlFor="confirmPassword">
+          Confirm Password
+        </FormLabel>
         <Input
           type="password"
           id="confirmPassword"
           aria-describedby="password-helper-text"
         />
         <ButtonGroup spacing={4}>
-          <Button
-            mt={4}
-            variantColor="green"
-            type="submit"
-          >
+          <Button mt={4} variantColor="green" type="submit">
             Sign Up
-      </Button>
-          <Button
-            mt={4}
-            variantColor="teal"
-            type="submit"
-          >
+          </Button>
+          <Button mt={4} variantColor="teal" type="submit">
             Sign In
-      </Button>
+          </Button>
           <NextLink href="/home" passHref>
-            <Button
-              mt={4}
-              as="a"
-              variantColor="teal"
-              type="submit"
-            >
+            <Button mt={4} as="a" variantColor="teal" type="submit">
               Skip
-        </Button>
+            </Button>
           </NextLink>
         </ButtonGroup>
       </FormControl>

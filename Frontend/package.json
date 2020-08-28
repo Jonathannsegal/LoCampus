@@ -11,6 +11,7 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "eslint . --ext .json --ext .js",
+    "test": "jest",
     "start": "next start"
   },
   "keywords": [
@@ -37,6 +38,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
+    "jest": "^26.4.2",
     "prettier": "2.1.1"
   }
 }

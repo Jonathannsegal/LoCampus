@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Box, Stack, Icon } from '@chakra-ui/core';
+import { Box, IconButton } from '@chakra-ui/core';
 import { MdPermIdentity } from "react-icons/md";
+import { FiMap } from "react-icons/fi";
+
 
 
 class Sidebar extends Component {
@@ -8,33 +10,45 @@ class Sidebar extends Component {
     render() {
       return (
         <Box 
-          border="1px solid #E8EAED"
+          border="0px"
           boxshadow="0 2px 4px rgba(0,0,0,0.3)"
           bg="#FF6347"
-          w="9%"
+          w="6%"
           h="100%"
           position="absolute"
-          top="50%"
           left="0"
-          transform="translate(-50%, -50%)"
           p={4}
           color="black"
           zIndex={98}
+          padding="36px"
+          margin="0px"
         >
-         <Stack>
-            <Icon name="phone" position="absolute" right="5" top="20%" size="25%" color="yellow.500" />
-            <Icon name="bell" position="absolute" right="5" top="0" size="30%" color="yellow.500" />
-         </Stack>
-        {/* Would like to use the IconButtons below instead of Icons above */}
-          
-          {/* <IconButton
-            variant="solid"
-            variantColor="gray"
-            aria-label="Profile"
-            fontSize="30px"
-            icon={MdPermIdentity}
-            size="lg"
-          /> */}
+          <a href="../personal">
+            <IconButton
+              variant="ghost"
+              variantColor="gray"
+              aria-label="Profile"
+              fontSize="30px"
+              icon={MdPermIdentity}
+              size="lg"
+              top="200px"
+              border-radius="0.95rem"
+              position="relative"
+            />  
+          </a>
+          <a href="../location">
+            <IconButton
+              variant="ghost"
+              variantColor="gray"
+              aria-label="Map"
+              fontSize="30px"
+              icon={FiMap}
+              size="lg"
+              top="300px"
+              border-radius="0.95rem"
+              position="relative"
+            />
+          </a>
         </Box>
       );
     }

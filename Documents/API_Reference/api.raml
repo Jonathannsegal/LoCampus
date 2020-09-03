@@ -1,0 +1,188 @@
+#%RAML 1.0
+title: locampus
+version: v1
+baseUri: http://hv_10.iastate.edu
+types:
+  TestType:
+    type: object
+    properties:
+      id: number
+      optional?: string
+      expanded:
+        type: object
+        properties:
+          count: number
+/ping:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Pong"
+              }
+/login:
+  post:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "Username" : "username",
+                "Password" : "password"
+              }
+
+/register:
+  post:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "Email" : "email",
+                "Username" : "username",
+                "Password1" : "password",
+                "Password2" : "password"
+              }
+
+/role/{userGuid}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "role" : "role"
+              }
+
+/{userGuid}/bio:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "User profile" : "picture",
+                "text bio": "text",
+                "score" : "int",
+                "banner": "image",
+              }
+
+/{userGuid}/badges:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "array of badges" : "[]"
+              }
+
+/{userGuid}/badge/{badgeGuid}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "one badge" : "[]"
+              }
+
+/{userGuid}/posts:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "array of posts" : "[]"
+              }
+
+/{userGuid}/post/{postGuid}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "array of posts" : "[]"
+              }
+
+/{locationGuid}/bio:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "Banner" : "image",
+                "Faculty" : "array of faculty",
+                "Students" : "array of students"
+              }
+
+/{locationGuid}/{locationGuid}/bio:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "Banner" : "image",
+                "Faculty" : "array of faculty",
+                "Students" : "array of students"
+              }
+
+/{locationGuid}/posts:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "all posts at this location"
+              }
+
+/{locationGuid}/{locationGuid}/posts:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "all posts at this location"
+              }
+
+/post:
+  post:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "post data stuff"
+              }
+
+/{postGuid}/rate:
+  post:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "rate post"
+              }

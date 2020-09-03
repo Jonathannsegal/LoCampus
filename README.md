@@ -19,3 +19,7 @@ The back end of the project, this includes SQL, Rest API, and corresponding serv
 ## Run Local [___Go to___](./Documents/RUNLOCAL.md)
 
 This is a walkthough on how to set up local enviorment variables and run the project locally
+
+## API Reference [___Go to___](./Documents/APIREFERENCE.md)
+
+The reference that we will use to build out our API in Springboot for the backend

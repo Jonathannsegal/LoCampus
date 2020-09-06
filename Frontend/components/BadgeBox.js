@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box, IconButton, Image } from '@chakra-ui/core';
+import { Flex, IconButton, Image } from '@chakra-ui/core';
 
 
 class BadgeBox extends Component {
@@ -12,11 +12,11 @@ class BadgeBox extends Component {
 
   render() {
     return (
-      <Box size="200px" bg="blue.200" 
-      display="inline-block" padding="40px" margin="30px" 
+      <Flex w="15em" h="15em" bg="blue.200" 
+      display="inline-block" padding="50px" margin="30px" 
       border="5px solid black" borderRadius="30px">
         <Image src={this.props.src} alt={this.props.alt}/>
-      </Box>
+      </Flex>
     );
   }
 }

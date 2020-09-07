@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/core';
-import Login from '../components/Onboarding/Login';
-import Header from '../components/Onboarding/Header';
+import Login from '../src/components/Onboarding/Login';
+import Header from '../src/components/Onboarding/Header';
 
 const Video = styled.video`
   object-fit: cover;

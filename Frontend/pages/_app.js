@@ -5,7 +5,7 @@ import {
   ColorModeProvider,
 } from '@chakra-ui/core';
 import { Global, css } from '@emotion/core';
-import theme from '../styles/theme';
+import theme from '../src/styles/theme';
 
 const GlobalStyle = ({ children }) => (
   <>

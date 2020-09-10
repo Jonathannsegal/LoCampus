@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,12 +19,14 @@ public class PostController {
 
     private final Logger logger = LoggerFactory.getLogger(PostController.class);
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.POST, path = "/post/new")
     public String saveOwner(@RequestBody Post post) {
         postRepository.save(post);
         return "Author " + post.getAuthor() + " Content " + post.getContent();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.GET, path = "/post")
     public List<Post> getAllPosts() {
         logger.info("Entered into Controller Layer");

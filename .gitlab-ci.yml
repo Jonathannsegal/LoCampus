@@ -1,0 +1,34 @@
+  stages:
+    - gradlebuild
+    - gradletest
+    - autodeploy
+  
+  gradle-build:
+    stage: gradlebuild
+    tags:
+      - shell
+    script:
+      - cd Backend
+      - gradle build
+
+  gradle-test:
+    stage: gradletest
+    tags:
+      - shell
+    script:
+      - cd Backend
+      - gradle test
+    artifacts:
+      paths:
+        - Backend/build/libs/*.jar
+
+  autoDeploy:
+    stage: autodeploy
+    tags:
+     - shell
+    script:
+      - cd Backend
+      - gradle build
+      - sudo mv build/libs/*.jar /target/locampus.jar 
+      - sudo systemctl stop system-locampus
+      - sudo systemctl start system-locampus

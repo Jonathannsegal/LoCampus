@@ -28,7 +28,7 @@ class BadgeCase extends Component {
     return (
         <Flex bg={this.props.color} position={this.props.position} 
         left={this.props.left} top={this.props.top} w={this.props.w} h={this.props.h}
-        wrap="wrap" justify="center" pt="30px" borderRadius="15px 0 0 0">
+        wrap="wrap" justify="center" pt="30px" borderRadius="15px 0 0 15px">
             {badgeList}
         </Flex>
     );

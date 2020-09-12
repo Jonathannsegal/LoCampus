@@ -12,7 +12,7 @@
     "build": "next build",
     "lint": "eslint . --ext .json --ext .js",
     "test": "jest",
-    "start": "next start"
+    "start": "next start -p 3001"
   },
   "keywords": [
     "location",

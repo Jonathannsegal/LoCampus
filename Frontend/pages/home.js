@@ -15,7 +15,7 @@ import {
 const Home = () => {
   const [state, setState] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:8080/post')
+    fetch('http://coms-309-hv-10.cs.iastate.edu:8080/post')
       .then(res => res.json())
       .then(
         (result) => {
@@ -44,7 +44,7 @@ const Home = () => {
           initialValues={{ author: "", content: "" }}
           onSubmit={(values) => {
             setState(state => [...state, values]);
-            fetch('http://localhost:8080/post/new', {
+            fetch('http://coms-309-hv-10.cs.iastate.edu:8080/post/new', {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',

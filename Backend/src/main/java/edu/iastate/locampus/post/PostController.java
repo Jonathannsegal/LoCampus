@@ -19,14 +19,14 @@ public class PostController {
 
     private final Logger logger = LoggerFactory.getLogger(PostController.class);
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://coms-309-hv-10.cs.iastate.edu")
     @RequestMapping(method = RequestMethod.POST, path = "/post/new")
     public String saveOwner(@RequestBody Post post) {
         postRepository.save(post);
         return "Author " + post.getAuthor() + " Content " + post.getContent();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://coms-309-hv-10.cs.iastate.edu")
     @RequestMapping(method = RequestMethod.GET, path = "/post")
     public List<Post> getAllPosts() {
         logger.info("Entered into Controller Layer");

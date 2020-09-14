@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Head from 'next/head'
 
+
 export default function Home() {
   return (
     <div className="container">
@@ -11,11 +12,17 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-        Read <Link href="/posts/first-post"><a>this page!</a></Link>
+        Experiment #1 for <Link href="/posts/first-post"><a>LoCampus!</a></Link>
         </h1>
 
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+        This is my first project using next.js <code>pages/index.js</code>
+        </p>
+        <p>
+          Created By: Alex Domowicz
+        </p>
+        <p>
+          For Mitra and Com S 309
         </p>
 
         <div className="grid">

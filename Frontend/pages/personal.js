@@ -14,7 +14,7 @@ const Personal = () => (
         <Text fontSize="30px">Bio</Text>
       </Flex>
       <PostList color="purple.200"/>
-      <BadgeCase position="relative" w="35vw" left="65%" color="blue.500" zIndex={60}/> 
+      <BadgeCase position="relative" w="35vw" left="65%" color="blue.500" zIndex={60} borderRadius="15px 0 0 15px"/> 
     </Flex>
     
     {/* <IconButton

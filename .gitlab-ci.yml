@@ -1,0 +1,48 @@
+  stages:
+    - gradlebuild
+    - gradletest
+    - gradledeploy
+    - nextdeploy
+  
+  gradle-build:
+    stage: gradlebuild
+    tags:
+      - spring_tag
+    script:
+      - cd Backend
+      - gradle build
+
+  gradle-test:
+    stage: gradletest
+    tags:
+      - spring_tag
+    script:
+      - cd Backend
+      - gradle test
+    artifacts:
+      paths:
+        - Backend/build/libs/*.jar
+
+  gradle-deploy:
+    stage: gradledeploy
+    tags:
+      - spring_tag
+    script:
+      - cd Backend
+      - gradle build
+      - sudo mv build/libs/*.jar /target/locampus.jar 
+      - sudo systemctl stop system-locampus
+      - sudo systemctl start system-locampus
+
+  next-deploy:
+    stage: nextdeploy
+    tags:
+      - next_tag
+    script:
+      - sudo rm -r /target/Frontend
+      - sudo mv Frontend /target
+      - cd /target/Frontend
+      - npm install --production
+      - npm run build
+      - pm2 delete all
+      - pm2 --name locampus start npm -- start

@@ -12,7 +12,7 @@
     "build": "next build",
     "lint": "eslint . --ext .json --ext .js",
     "test": "jest",
-    "start": "next start"
+    "start": "next start -p 3001"
   },
   "keywords": [
     "location",
@@ -24,6 +24,7 @@
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "emotion-theming": "^10.0.27",
+    "formik": "^2.1.5",
     "next": "9.5.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",

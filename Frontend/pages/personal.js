@@ -4,11 +4,10 @@ import { GiPoliceBadge } from "react-icons/gi";
 import BadgeCase from '../src/components/BadgeCase';
 import PersonalHeading from '../src/components/PersonalHeading';
 import PostList from '../src/components/PostList';
-
-
+import Container from '../src/components/Shared/Container';
 
 const Personal = () => (
-  <>
+  <Container>
     <PersonalHeading />
     <Flex bg="green.200" w="100vw" h="2000px" position="relative">
       <Flex bg="green.300" w="55%" position="absolute" h="16%" top="3%" left="5%" borderRadius="30px" border="5px solid" p="2%">
@@ -27,7 +26,7 @@ const Personal = () => (
             size="lg"
             border-radius="0.95rem"
       /> */}
-  </>
+  </Container>
 );
 
 export default Personal;

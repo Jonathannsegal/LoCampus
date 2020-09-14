@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import Map from '../src/components/Map';
+import Container from '../src/components/Shared/Container';
 import Post from '../src/components/Home/Post';
 import { Formik, Field } from 'formik';
 import {
@@ -7,6 +7,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Textarea,
   Button,
   Stack,
   FormErrorMessage
@@ -24,14 +25,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
-      {/* <Map /> */}
-      <Box m="auto" w="40vw">
-        <Stack spacing={4} shouldWrapChildren>
-          {state.map(c => <Post key={c.id} author={c.author} content={c.content} />)}
-        </Stack>
-      </Box>
-
+    <Container>
       <Box
         border={"1px solid #E8EAED"}
         borderRadius="8px"
@@ -43,7 +37,7 @@ const Home = () => {
         <Formik
           initialValues={{ author: "", content: "" }}
           onSubmit={(values) => {
-            setState(state => [...state, values]);
+            setState(state => [values, ...state]);
             fetch('http://coms-309-hv-10.cs.iastate.edu:8080/post/new', {
               method: 'POST',
               headers: {
@@ -69,7 +63,7 @@ const Home = () => {
                 {({ field, form }) => (
                   <FormControl isInvalid={form.errors.name && form.touched.name}>
                     <FormLabel htmlFor="content">Post</FormLabel>
-                    <Input {...field} id="content" placeholder="Post n Stuff" />
+                    <Textarea {...field} id="content" placeholder="Post n Stuff" />
                     <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -84,8 +78,15 @@ const Home = () => {
             </form>
           )}
         </Formik>
+        <Box m="auto" w="40vw">
+          <Stack spacing={4} shouldWrapChildren>
+            {state
+            .sort((a, b) => b.id - a.id)
+            .map(c => <Post key={c.id} author={c.author} content={c.content} />)}
+          </Stack>
+        </Box>
       </Box>
-    </>
+    </Container>
   );
 }
 

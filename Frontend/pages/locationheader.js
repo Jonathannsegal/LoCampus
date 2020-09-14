@@ -26,7 +26,7 @@ const locationheader = () => (
     profilepicF = "https://www.engineering.iastate.edu/people/files/2020/01/mitra.jpg"
     colorF = "#FFEC0B"
 
-    type = "faculty"
+    type = "location"
  />
   
   </>

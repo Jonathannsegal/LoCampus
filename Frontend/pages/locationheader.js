@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Box, Heading } from '@chakra-ui/core';
-import Header from '../components/test/Header'
+import Header from '../components/header'
 
 
 const locationheader = () => (

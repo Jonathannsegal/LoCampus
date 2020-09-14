@@ -17,8 +17,8 @@ public class Controller {
         return users;
     }
 
-    @GetMapping("/dog")
-    public String dog() {
-        return "cat";
+    @GetMapping("/test1")
+    public String test1() {
+        return "calling api succesfully";
     }
 }

@@ -15,9 +15,13 @@ public class User {
     @NotFound(action = NotFoundAction.IGNORE)
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "email")
     @NotFound(action = NotFoundAction.IGNORE)
     private String email;
+
+    @Column(name = "name")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private String name;
 
     @Column(name = "password")
     @NotFound(action = NotFoundAction.IGNORE)
@@ -49,6 +53,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {

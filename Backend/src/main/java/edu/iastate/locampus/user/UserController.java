@@ -11,8 +11,9 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/user/register")
-    public void createUser(@RequestBody User user) {
+    public String createUser(@RequestBody User user) {
         userRepository.save(user);
+        return "Name " + user.getName() + " Email " + user.getEmail();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

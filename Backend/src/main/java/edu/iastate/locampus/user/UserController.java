@@ -17,6 +17,14 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/user/register")
     public String createUser(@RequestBody User user) {
+        if (user.getEmail() == null || user.getName() == null || user.getPassword() == null || user.getVerify() == null) {
+            return null;
+        }
+
+        if (!user.getPassword().equals(user.getVerify())) {
+            return null;
+        }
+
         userRepository.save(user);
         return "Name " + user.getName() + " Email " + user.getEmail();
     }

@@ -4,16 +4,17 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "id")
     @NotFound(action = NotFoundAction.IGNORE)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "name")
     @NotFound(action = NotFoundAction.IGNORE)
@@ -42,6 +43,10 @@ public class User {
     @Column(name = "posts")
     @NotFound(action = NotFoundAction.IGNORE)
     private Integer[] posts;
+
+    public UUID getId() {
+        return id;
+    }
 
     public String getEmail() {
         return email;

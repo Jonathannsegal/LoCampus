@@ -1,17 +1,35 @@
 import React, { Component } from 'react';
 import { Flex } from '@chakra-ui/core';
 import BadgeBox from '../components/BadgeBox';
-
+import building from '../../public/lotties/building.json'
+import chest from '../../public/lotties/chest.json'
+import clock from '../../public/lotties/clock.json'
+import creditcard from '../../public/lotties/creditcard.json'
+import dnalottie from '../../public/lotties/dna.json'
+import engineering from '../../public/lotties/engineering.json'
+import handshake from '../../public/lotties/handshake.json'
+import hospital from '../../public/lotties/hospital.json'
+import map from '../../public/lotties/map.json'
+import navpinsfalling from '../../public/lotties/navpinsfalling.json'
+import radar from '../../public/lotties/radar.json'
+import rocket from '../../public/lotties/rocket.json'
+import student from '../../public/lotties/student.json'
+import teacher from '../../public/lotties/teacher.json'
+import tree from '../../public/lotties/tree.json'
+import trophy from '../../public/lotties/trophy.json'
+import virus from '../../public/lotties/virus.json'
+import wallet from '../../public/lotties/wallet.json'
+import GenericLottie from './GenericLottie';
 
 
 class BadgeCase extends Component {
 
   render() {
     var nameList = [
-        {alt:'trophy', src:'/images/trophy.png', key:'1'},
-        {alt:'gear', src:'/images/gear.png', key:'2'},
-        {alt:'atom', src:'/images/atom.png', key:'3'},
-        {alt:'locked', src:'/images/question.png', key:'4'},
+        {alt:'trophy', src:'', anim: <GenericLottie name={trophy} />, key:'1'},
+        {alt:'tree', src:'', anim: <GenericLottie name={tree} />, key:'2'},
+        {alt:'virus', src:'', anim:<GenericLottie name={virus} />, key:'3'},
+        {alt:'radar', src:'', anim: <GenericLottie name={radar}/>, key:'4'},
         {alt:'locked', src:'/images/question.png', key:'5'},
         {alt:'locked', src:'/images/question.png', key:'6'},
         {alt:'locked', src:'/images/question.png', key:'7'},
@@ -22,7 +40,7 @@ class BadgeCase extends Component {
         {alt:'locked', src:'/images/question.png', key:'12'},
         ];
     var badgeList = nameList.map(function(name){
-        return <BadgeBox src={name.src} alt={name.alt} />
+        return <BadgeBox src={name.src} alt={name.alt} anim={name.anim}/>
     })    
            
     return (

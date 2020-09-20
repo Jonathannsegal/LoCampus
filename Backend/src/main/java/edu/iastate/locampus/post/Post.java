@@ -11,15 +11,17 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.springframework.core.style.ToStringCreator;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "post")
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "id")
     @NotFound(action = NotFoundAction.IGNORE)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "author")
     @NotFound(action = NotFoundAction.IGNORE)
@@ -29,12 +31,8 @@ public class Post {
     @NotFound(action = NotFoundAction.IGNORE)
     private String content;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public boolean isNew() {

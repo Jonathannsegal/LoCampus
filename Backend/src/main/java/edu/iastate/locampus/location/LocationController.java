@@ -10,9 +10,14 @@ public class LocationController {
     @Autowired
     LocationRepository locationRepository;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/user/{userid}/posts")
-    public Integer[] getPosts(@PathVariable("userid") Integer userId) {
-        return locationRepository.getOne(userId).getPosts();
+    public ObjectNode getPosts(@PathVariable("userid") Integer userId) {
+        ObjectNode objectNode = objectMapper.createObjectNode();
+        objectNode.set("badges", objectMapper.valueToTree(locationRepository.getOne(userId).getPosts()));
+        return objectNode;
     }
 }

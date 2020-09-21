@@ -6,7 +6,12 @@ export default (props) => {
     <>
       <Box position="absolute" height="50%">
         <Box width="40%">
-          <Image margin="0.1rem 1rem" padding="0.3rem" src="/images/logo.png" alt="Iowa State Wordmark" />
+          <Image
+            margin="0.1rem 1rem"
+            padding="0.3rem"
+            src="/images/logo.png"
+            alt="Iowa State Wordmark"
+          />
         </Box>
       </Box>
     </>

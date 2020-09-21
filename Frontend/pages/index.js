@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/core';
+import { withRedux } from '../src/lib/redux';
 import Login from '../src/components/Onboarding/Login';
 import Header from '../src/components/Onboarding/Header';
 
@@ -10,7 +11,7 @@ const Video = styled.video`
   width: 100vw;
 `;
 
-export default () => {
+const Index = () => {
   const videoRef = useRef();
 
   useEffect(() => {
@@ -29,3 +30,5 @@ export default () => {
     </Box>
   );
 };
+
+export default withRedux(Index);

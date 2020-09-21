@@ -9,7 +9,6 @@ const Badges = () => (
     {/* <Sidebar /> */}
     <Box w="100%" h="20%" position="relative" px="100px" py="5px">
       <Text fontSize={[60, 60, 80, 80]} fontFamily="Lexend Deca" display="block">
-      >
         Badge Collection
       </Text>
     </Box>

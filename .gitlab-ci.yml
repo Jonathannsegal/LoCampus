@@ -44,5 +44,5 @@
       - cd /target/Frontend
       - npm install --production
       - npm run build
+      - pm2 delete all
       - pm2 --name locampus start npm -- start
-      # - pm2 delete all

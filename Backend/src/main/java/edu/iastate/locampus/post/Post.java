@@ -27,6 +27,10 @@ public class Post {
     @NotFound(action = NotFoundAction.IGNORE)
     private String author;
 
+    @Column(name = "timestamp")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private String timestamp;
+
     @Column(name = "content")
     @NotFound(action = NotFoundAction.IGNORE)
     private String content;
@@ -55,11 +59,20 @@ public class Post {
         this.content = content;
     }
 
+    public String getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     @Override
     public String toString() {
         return new ToStringCreator(this)
                 .append("id", this.getId())
                 .append("new", this.isNew())
+                .append("timestamp", this.getTimestamp())
                 .append("author", this.getAuthor())
                 .append("content", this.getContent()).toString();
     }

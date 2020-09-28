@@ -56,6 +56,7 @@ const Home = () => {
                 body: JSON.stringify({
                   author: username,
                   content: values.content,
+                  timestamp: Date()
                 }),
               },
             );

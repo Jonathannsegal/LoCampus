@@ -23,7 +23,7 @@ public class PostController {
     @RequestMapping(method = RequestMethod.POST, path = "/post/new")
     public String saveOwner(@RequestBody Post post) {
         postRepository.save(post);
-        return "Author " + post.getAuthor() + "Time " + post.getTimestamp() + " Content " + post.getContent();
+        return "Author " + post.getAuthor() + "Time " + post.getTimestamp() + " Content " + post.getContent() + " Location " + post.getLocation();
     }
 
     @CrossOrigin(origins = "http://coms-309-hv-10.cs.iastate.edu")

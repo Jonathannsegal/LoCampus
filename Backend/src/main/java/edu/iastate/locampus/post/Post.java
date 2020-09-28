@@ -35,6 +35,10 @@ public class Post {
     @NotFound(action = NotFoundAction.IGNORE)
     private String content;
 
+    @Column(name = "location")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private String location;
+
     public UUID getId() {
         return id;
     }
@@ -67,6 +71,14 @@ public class Post {
         this.timestamp = timestamp;
     }
 
+    public String getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return new ToStringCreator(this)
@@ -74,6 +86,8 @@ public class Post {
                 .append("new", this.isNew())
                 .append("timestamp", this.getTimestamp())
                 .append("author", this.getAuthor())
-                .append("content", this.getContent()).toString();
+                .append("content", this.getContent())
+                .append("location", this.getLocation())
+                .toString();
     }
 }

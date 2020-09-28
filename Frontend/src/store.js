@@ -1,9 +1,16 @@
 import { createStore, applyMiddleware } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const initialState = {
   username: '',
 };
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
 
 const reducer = (state = { initialState, input: {} }, action) => {
   switch (action.type) {
@@ -17,13 +24,25 @@ const reducer = (state = { initialState, input: {} }, action) => {
   }
 };
 
+const persistedReducer = persistReducer(persistConfig, reducer)
+
 const composeEnhancers = composeWithDevTools({
   trace: true,
 });
-export const initializeStore = (preloadedState = initialState) => {
-  return createStore(
-    reducer,
-    preloadedState,
-    composeEnhancers(applyMiddleware()),
-  );
-};
+
+// const initializeStore = (preloadedState = initialState) => {
+//   return createStore(
+//     persistedReducer,
+//     preloadedState,
+//     composeEnhancers(applyMiddleware())
+//   );
+// };
+
+const initializeStore = createStore(
+  persistedReducer,
+  composeEnhancers(applyMiddleware())
+);
+
+const persistor = persistStore(initializeStore);
+
+export { initializeStore, persistor };

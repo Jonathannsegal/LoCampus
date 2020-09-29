@@ -34,6 +34,12 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping("/user/{userId}/delete")
+    public void deleteUser(@PathVariable("userId") Integer userId) {
+        userRepository.delete(userRepository.getOne(userId));
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userId}/role")
     public ObjectNode getRole(@PathVariable("userId") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();

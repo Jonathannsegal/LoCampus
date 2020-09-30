@@ -5,25 +5,30 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.json.JsonParser;
+import org.springframework.boot.json.JsonParserFactory;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PostController {
 
     @Autowired
-    PostRepository postRepository;
+    private PostRepository postRepository;
 
+    private final JsonParser parser = JsonParserFactory.getJsonParser();
     private final Logger logger = LoggerFactory.getLogger(PostController.class);
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(method = RequestMethod.POST, path = "/post/new")
-    public String saveOwner(@RequestBody Post post) {
+    public String createPost(@RequestBody Post post) {
         postRepository.save(post);
         return post.toString();
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping("/post/{postId}/setcontent")
+    public void setContent(@PathVariable("postId") Integer postId, @RequestBody String content) {
+        postRepository.getOne(postId).setContent((String) parser.parseMap(content).get("content"));
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")

@@ -40,6 +40,15 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping("/user/{userid}/exists")
+    public ObjectNode exists(@PathVariable("userid") Integer userId) {
+        ObjectNode objectNode = objectMapper.createObjectNode();
+        boolean exists = userRepository.findById(userId).orElse(null) != null ? true : false;
+        objectNode.put("exists", exists);
+        return objectNode;
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userId}/role")
     public ObjectNode getRole(@PathVariable("userId") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();

@@ -45,6 +45,7 @@ const Home = () => {
           initialValues={{ author: username, content: '' }}
           onSubmit={(values) => {
             setState((state) => [values, ...state]);
+            const location = 'Iowa State';
             fetch(
               'http://coms-309-hv-10.cs.iastate.edu:8080/post/new',
               {
@@ -56,7 +57,7 @@ const Home = () => {
                 body: JSON.stringify({
                   author: username,
                   content: values.content,
-                  location: 'Iowa State',
+                  location: location,
                   timestamp: Date()
                 }),
               },

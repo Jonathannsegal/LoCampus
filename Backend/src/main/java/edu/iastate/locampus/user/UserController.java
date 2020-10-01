@@ -14,7 +14,7 @@ public class UserController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @CrossOrigin(origins = "http://coms-309-hv-10.cs.iastate.edu")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/register")
     public String createUser(@RequestBody User user) {
         if (user.getEmail() == null || user.getName() == null || user.getPassword() == null || user.getVerify() == null) {
@@ -29,7 +29,7 @@ public class UserController {
         return "Name " + user.getName() + " Email " + user.getEmail();
     }
 
-    @CrossOrigin(origins = "http://coms-309-hv-10.cs.iastate.edu")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userId}/role")
     public ObjectNode getRole(@PathVariable("userId") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
@@ -37,7 +37,7 @@ public class UserController {
         return objectNode;
     }
 
-    @CrossOrigin(origins = "http://coms-309-hv-10.cs.iastate.edu")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userid}/badges")
     public ObjectNode getBadges(@PathVariable("userId") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
@@ -45,7 +45,7 @@ public class UserController {
         return objectNode;
     }
 
-    @CrossOrigin(origins = "http://coms-309-hv-10.cs.iastate.edu")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userId}/bio")
     public ObjectNode getBio(@PathVariable("userId") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
@@ -53,7 +53,7 @@ public class UserController {
         return objectNode;
     }
 
-    @CrossOrigin(origins = "http://coms-309-hv-10.cs.iastate.edu")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userid}/posts")
     public ObjectNode getPosts(@PathVariable("userid") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();

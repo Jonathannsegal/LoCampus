@@ -11,6 +11,7 @@ import {
   Text,
   FormErrorMessage,
 } from '@chakra-ui/core';
+import getPosts from '../src/app/util/getPosts';
 import { withRedux } from '../src/lib/redux';
 import Container from '../src/components/Shared/Container';
 import Post from '../src/components/Home/Post';
@@ -24,11 +25,7 @@ const Home = () => {
   const { username } = useHome();
   const [state, setState] = useState([]);
   useEffect(() => {
-    fetch('http://coms-309-hv-10.cs.iastate.edu:8080/post')
-      .then((res) => res.json())
-      .then((result) => {
-        setState(result);
-      });
+    getPosts().then(result => setState(result));
   }, []);
 
   return (

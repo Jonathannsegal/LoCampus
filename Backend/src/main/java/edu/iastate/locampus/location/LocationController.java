@@ -15,7 +15,7 @@ public class LocationController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @CrossOrigin(origins = "http://coms-309-hv-10.cs.iastate.edu")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userid}/posts")
     public ObjectNode getPosts(@PathVariable("userid") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();

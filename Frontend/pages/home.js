@@ -12,6 +12,7 @@ import {
   FormErrorMessage,
 } from '@chakra-ui/core';
 import getPosts from '../src/app/util/getPosts';
+import makePost from '../src/app/util/makePost';
 import { withRedux } from '../src/lib/redux';
 import Container from '../src/components/Shared/Container';
 import Post from '../src/components/Home/Post';
@@ -43,22 +44,24 @@ const Home = () => {
           onSubmit={(values) => {
             setState((state) => [values, ...state]);
             const location = 'Iowa State';
-            fetch(
-              'http://coms-309-hv-10.cs.iastate.edu:8080/post/new',
-              {
-                method: 'POST',
-                headers: {
-                  Accept: 'application/json',
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  author: username,
-                  content: values.content,
-                  location: location,
-                  timestamp: Date()
-                }),
-              },
-            );
+            makePost(username, values.content, location, Date());
+            // .then(result => setState(result));
+            // fetch(
+            //   'http://coms-309-hv-10.cs.iastate.edu:8080/post/new',
+            //   {
+            //     method: 'POST',
+            //     headers: {
+            //       Accept: 'application/json',
+            //       'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({
+            //       author: username,
+            //       content: values.content,
+            //       location: location,
+            //       timestamp: Date()
+            //     }),
+            //   },
+            // );
           }}
         >
           {(props) => (
@@ -90,10 +93,10 @@ const Home = () => {
         <Box m="auto" w="40vw">
           <Stack spacing={4} shouldWrapChildren>
             {state
-              .sort((a, b) => b.id - a.id)
+              .sort((a, b) => b.timestamp - a.timestamp)
               .map((c) => (
                 <Post
-                  key={c.id}
+                  key={c.timestamp}
                   author={c.author}
                   content={c.content}
                 />

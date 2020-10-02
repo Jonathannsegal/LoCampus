@@ -18,10 +18,9 @@ import java.util.UUID;
 public class Post {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+	@Column(name = "id", updatable = false, nullable = false)
     @NotFound(action = NotFoundAction.IGNORE)
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     @Column(name = "author")
     @NotFound(action = NotFoundAction.IGNORE)
@@ -41,10 +40,6 @@ public class Post {
 
     public UUID getId() {
         return id;
-    }
-
-    public boolean isNew() {
-        return this.id == null;
     }
 
     public String getAuthor() {
@@ -81,13 +76,8 @@ public class Post {
 
     @Override
     public String toString() {
-        return new ToStringCreator(this)
-                .append("id", this.getId())
-                .append("new", this.isNew())
-                .append("timestamp", this.getTimestamp())
-                .append("author", this.getAuthor())
-                .append("content", this.getContent())
-                .append("location", this.getLocation())
-                .toString();
+        return new ToStringCreator(this).append("id", this.getId()).append("timestamp", this.getTimestamp())
+                .append("author", this.getAuthor()).append("content", this.getContent())
+                .append("location", this.getLocation()).toString();
     }
 }

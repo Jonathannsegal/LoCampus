@@ -26,6 +26,12 @@ public class PostController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping("/post/{postId}/delete")
+    public void deletePost(@PathVariable("postId") Integer postId) {
+        postRepository.delete(postRepository.getOne(postId));
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/post/{postId}/setcontent")
     public void setContent(@PathVariable("postId") Integer postId, @RequestBody String content) {
         postRepository.getOne(postId).setContent((String) parser.parseMap(content).get("content"));

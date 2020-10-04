@@ -1,6 +1,7 @@
 package edu.iastate.locampus.post;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,22 @@ public class PostController {
     @PostMapping("/post/{postId}/setcontent")
     public void setContent(@PathVariable("postId") Integer postId, @RequestBody String content) {
         postRepository.getOne(postId).setContent((String) parser.parseMap(content).get("content"));
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping("/post/{postId}/rank")
+    public void rank(@PathVariable("postId") Integer postId, @RequestBody String content) {
+        Map<String, Object> body = parser.parseMap(content);
+        Post post = postRepository.getOne(postId);
+
+        String direction = (String) body.get("direction");
+        if (direction.equals("up")) {
+            post.setRank(post.getRank() + 1);
+        } else if (direction.equals("down")) {
+            post.setRank(post.getRank() - 1);
+        }
+
+        // add logic to check if user is authenticated
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")

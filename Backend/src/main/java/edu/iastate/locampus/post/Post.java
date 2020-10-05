@@ -2,8 +2,6 @@ package edu.iastate.locampus.post;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -37,6 +35,10 @@ public class Post {
     @Column(name = "location")
     @NotFound(action = NotFoundAction.IGNORE)
     private String location;
+
+    @Column(name = "rank")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Integer rank;
 
     public UUID getId() {
         return id;
@@ -72,6 +74,14 @@ public class Post {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     @Override

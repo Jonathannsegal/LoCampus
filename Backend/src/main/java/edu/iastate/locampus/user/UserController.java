@@ -3,6 +3,8 @@ package edu.iastate.locampus.user;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonParser;
+import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,6 +15,8 @@ public class UserController {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    private JsonParser parser = JsonParserFactory.getJsonParser();
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/register")
@@ -30,6 +34,21 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping("/user/{userId}/delete")
+    public void deleteUser(@PathVariable("userId") Integer userId) {
+        userRepository.delete(userRepository.getOne(userId));
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping("/user/{userid}/exists")
+    public ObjectNode exists(@PathVariable("userid") Integer userId) {
+        ObjectNode objectNode = objectMapper.createObjectNode();
+        boolean exists = userRepository.findById(userId).orElse(null) != null ? true : false;
+        objectNode.put("exists", exists);
+        return objectNode;
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userId}/role")
     public ObjectNode getRole(@PathVariable("userId") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
@@ -43,6 +62,12 @@ public class UserController {
         ObjectNode objectNode = objectMapper.createObjectNode();
         objectNode.set("badges", objectMapper.valueToTree(userRepository.getOne(userId).getBadges()));
         return objectNode;
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping("/user/{userId}/setbio")
+    public void setBio(@PathVariable("userId") Integer userId, @RequestBody String bio) {
+        userRepository.getOne(userId).setBio((String) parser.parseMap(bio).get("bio"));
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")

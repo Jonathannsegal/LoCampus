@@ -11,11 +11,6 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
-    @NotFound(action = NotFoundAction.IGNORE)
-    private Integer id;
-
     @Column(name = "name")
     @NotFound(action = NotFoundAction.IGNORE)
     private String name;
@@ -24,15 +19,19 @@ public class Role {
     @NotFound(action = NotFoundAction.IGNORE)
     private Set<Permission> permissions;
 
-    private Set<Permission> getPermissions() {
+    public String getName() {
+        return name;
+    }
+
+    public Set<Permission> getPermissions() {
         return permissions;
     }
 
-    private void addPermission(Permission permission) {
+    public void addPermission(Permission permission) {
         permissions.add(permission);
     }
 
-    private void removePermission(Permission permission) {
+    public void removePermission(Permission permission) {
         permissions.remove(permission);
     }
 }

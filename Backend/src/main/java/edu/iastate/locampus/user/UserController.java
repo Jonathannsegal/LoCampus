@@ -87,4 +87,11 @@ public class UserController {
         objectNode.set("posts", objectMapper.valueToTree(userRepository.getOne(userId).getPosts()));
         return objectNode;
     }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping("/user/{followerid}/{followedid}")
+    public void setFollower(@PathVariable("followerid") UUID followerId, @PathVariable("followedid") UUID followedId) {
+        userRepository.getOne(followerId).addFollower(followedId);
+        userRepository.getOne(followedId).addFollowedBy(followerId);
+    }
 }

@@ -5,6 +5,7 @@ import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.UUID;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "user")
@@ -46,7 +47,15 @@ public class User {
 
     @Column(name = "posts")
     @NotFound(action = NotFoundAction.IGNORE)
-    private Integer[] posts;
+    private HashSet<UUID> posts;
+
+    @Column(name = "followers")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private HashSet<UUID> followers;
+
+    @Column(name = "followedBy")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private HashSet<UUID> followedBy;
 
     public UUID getId() {
         return id;
@@ -80,7 +89,7 @@ public class User {
         return verify;
     }
 
-    public void setVerify() {
+    public void setVerify(String verify) {
         this.verify = verify;
     }
 
@@ -104,7 +113,23 @@ public class User {
         this.bio = bio;
     }
 
-    public Integer[] getPosts() {
+    public HashSet<UUID> getPosts() {
         return posts;
+    }
+
+    public boolean addFollower(UUID followerId) {
+        return followers.add(followerId);
+    }
+
+    public boolean addFollowedBy(UUID followedId) {
+        return followedBy.add(followedId);
+    }
+
+    public HashSet<UUID> getFollowers() {
+        return followers;
+    }
+
+    public HashSet<UUID> getFollowedBy() {
+        return followedBy;
     }
 }

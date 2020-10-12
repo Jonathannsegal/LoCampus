@@ -45,23 +45,6 @@ const Home = () => {
             setState((state) => [values, ...state]);
             const location = 'Iowa State';
             makePost(username, values.content, location, Date());
-            // .then(result => setState(result));
-            // fetch(
-            //   'http://coms-309-hv-10.cs.iastate.edu:8080/post/new',
-            //   {
-            //     method: 'POST',
-            //     headers: {
-            //       Accept: 'application/json',
-            //       'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({
-            //       author: username,
-            //       content: values.content,
-            //       location: location,
-            //       timestamp: Date()
-            //     }),
-            //   },
-            // );
           }}
         >
           {(props) => (

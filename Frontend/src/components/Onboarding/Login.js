@@ -3,6 +3,7 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import styled from '@emotion/styled';
+import postLogin from '../../app/util/postLogin'
 import {
     Image,
     Box,
@@ -55,22 +56,7 @@ const Login = () => {
                 onSubmit={(values, { setSubmitting }) => {
                     setUser(values.name);
                     setSubmitting(false);
-                    fetch(
-                        'http://coms-309-hv-10.cs.iastate.edu:8080/user/register',
-                        {
-                            method: 'POST',
-                            headers: {
-                                Accept: 'application/json',
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                name: values.name,
-                                email: values.email,
-                                password: values.password,
-                                verify: values.confirmPassword
-                            }),
-                        },
-                    );
+                    postLogin(values.name, values.email, values.password, values.confirmPassword);
                     router.push('/home');
                 }}
             >

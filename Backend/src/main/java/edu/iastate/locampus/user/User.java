@@ -15,7 +15,7 @@ public class User {
     @GeneratedValue
     @Column(name = "id")
     @NotFound(action = NotFoundAction.IGNORE)
-    private UUID id;
+    private Integer id;
 
     @Column(name = "email")
     @NotFound(action = NotFoundAction.IGNORE)
@@ -47,17 +47,17 @@ public class User {
 
     @Column(name = "posts")
     @NotFound(action = NotFoundAction.IGNORE)
-    private HashSet<UUID> posts;
+    private HashSet<Integer> posts;
 
     @Column(name = "followers")
     @NotFound(action = NotFoundAction.IGNORE)
-    private HashSet<UUID> followers;
+    private HashSet<Integer> followers;
 
     @Column(name = "followedBy")
     @NotFound(action = NotFoundAction.IGNORE)
-    private HashSet<UUID> followedBy;
+    private HashSet<Integer> followedBy;
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -113,23 +113,27 @@ public class User {
         this.bio = bio;
     }
 
-    public HashSet<UUID> getPosts() {
+    public HashSet<Integer> getPosts() {
         return posts;
     }
 
-    public boolean addFollower(UUID followerId) {
+    public boolean addFollower(Integer followerId) {
         return followers.add(followerId);
     }
 
-    public boolean addFollowedBy(UUID followedId) {
+    public boolean addFollowedBy(Integer followedId) {
         return followedBy.add(followedId);
     }
 
-    public HashSet<UUID> getFollowers() {
+    public HashSet<Integer> getFollowers() {
         return followers;
     }
 
-    public HashSet<UUID> getFollowedBy() {
+    public HashSet<Integer> getFollowedBy() {
         return followedBy;
+    }
+
+    public String toString() {
+        return name + " " + bio;
     }
 }

@@ -26,11 +26,11 @@ class BadgeCase extends Component {
 
   render() {
     var nameList = [
-        {alt:'trophy', src:'', anim: <GenericLottie name={trophy} />, key:'1'},
-        {alt:'tree', src:'', anim: <GenericLottie name={tree} />, key:'2'},
-        {alt:'virus', src:'', anim:<GenericLottie name={virus} />, key:'3'},
-        {alt:'radar', src:'', anim: <GenericLottie name={radar}/>, key:'4'},
-        {alt:'locked', src:'/images/question.png', key:'5'},
+        {alt:'student', src:'', animData: student, key:'1'},
+        {alt:'teacher', src:'', animData: teacher, key:'2'}, //https://assets4.lottiefiles.com/datafiles/zc3XRzudyWE36ZBJr7PIkkqq0PFIrIBgp4ojqShI/newAnimation.json
+        {alt:'creditcard', src:'', animData: creditcard, key:'3'},
+        {alt:'radar', src:'', animData: radar, key:'4'},
+        {alt:'locked', src:'/images/question.png', key:'5'}, //
         {alt:'locked', src:'/images/question.png', key:'6'},
         {alt:'locked', src:'/images/question.png', key:'7'},
         {alt:'locked', src:'/images/question.png', key:'8'},
@@ -40,7 +40,7 @@ class BadgeCase extends Component {
         {alt:'locked', src:'/images/question.png', key:'12'},
         ];
     var badgeList = nameList.map(function(name){
-        return <BadgeBox src={name.src} alt={name.alt} anim={name.anim}/>
+        return <BadgeBox src={name.src} alt={name.alt} animData={name.animData} />
     })    
            
     return (

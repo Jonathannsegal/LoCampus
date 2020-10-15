@@ -7,22 +7,21 @@ class BadgeBox extends Component {
     super(props);
     this.state = {
       unlocked: false,
-      play: true,
     };
   }
 
   render() {
     return (
-      <Flex
-w="15em" h="15em" bg="blue.200" justifyContent="center" align="center"
+      <Flex w="15em" h="15em" bg="blue.200" justifyContent="center" align="center"
         display="inline-block" padding="20px" margin="30px" 
         border="5px solid black" borderRadius="30px" objectFit="cover"
       >
-        {this.props.src ? (
-          <Image src={this.props.src} alt={this.props.alt} />
-        ) : (
-          <GenericLottie animData={this.props.animData} play={this.state.play}/>
-        )}
+        { this.props.unlocked 
+          ? 
+          (<GenericLottie animData={this.props.animData}/>) 
+          : 
+          (<Image src={'/images/question.png'} alt={this.props.alt} />)
+        }
       </Flex>
     );
   }

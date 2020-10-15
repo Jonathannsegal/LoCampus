@@ -5,6 +5,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const initialState = {
   username: '',
+  badges: {
+    student: false,
+    teacher: false,
+    creditcard: false,
+    radar: false,
+  }
 };
 
 const persistConfig = {
@@ -18,6 +24,14 @@ const reducer = (state = { initialState, input: {} }, action) => {
       return {
         ...state,
         username: action.payload.txt,
+      };
+    case 'SET_BADGE':
+      return {
+        ...state,
+        badges: {
+          ...state.badges,
+          [action.payload.badge]: action.payload.unlocked,
+        },
       };
     default:
       return state;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../components/searchbar'
+import Header from '../src/components/searchbar'
 const Alex = () => (
   <Header
 

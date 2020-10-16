@@ -1,18 +1,53 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Heading,
   IconButton,
   Flex,
   Text,
+  useToast,
 } from '@chakra-ui/core';
+import { useSelector } from 'react-redux';
+import { withRedux } from '../src/lib/redux';
+import { useDispatch } from 'react-redux';
+
 import { GiPoliceBadge } from 'react-icons/gi';
 import BadgeCase from '../src/components/BadgeCase';
 import PersonalHeading from '../src/components/PersonalHeading';
 import PostList from '../src/components/PostList';
 import Container from '../src/components/Shared/Container';
 
-const Personal = () => (
+const usePersonal = () => {
+
+  const dispatch = useDispatch();
+  const setBadge = (badgeName, unlocked) =>
+      dispatch({
+          type: 'SET_BADGE',
+          payload: { badge: badgeName, unlocked: unlocked },
+      });
+
+  const badges = useSelector((state) => ({...state.badges}));
+  return { badges, setBadge };
+};
+
+
+const Personal = () => {
+  const { badges, setBadge } = usePersonal();
+  const toast = useToast();
+
+  useEffect(() => {
+    if(!badges.student){
+      setBadge('student', true);
+      toast({
+        title: "\"Student\" Badge Earned!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      })
+    }
+  }, []);
+
+  return (
   <Container>
     <PersonalHeading />
     <Flex bg="green.200" w="100vw" h="2000px" position="relative">
@@ -50,6 +85,7 @@ const Personal = () => (
             border-radius="0.95rem"
       /> */}
   </Container>
-);
+  );
+};
 
-export default Personal;
+export default withRedux(Personal);

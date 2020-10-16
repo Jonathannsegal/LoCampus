@@ -45,21 +45,21 @@ const BadgeCase = (props) => {
   
   const { badges, setBadge } = useBadgeCase();
 
-  useEffect(() => {setBadge('teacher', false)}, []);
+  //useEffect(() => {setBadge('student', false)}, []);
 
   var nameList = [
-      {alt:'student',     animData: data_student,     unlocked: badges.student,     key:'1'},
-      {alt:'teacher',     animData: data_teacher,     unlocked: badges.teacher,     key:'2'}, //https://assets4.lottiefiles.com/datafiles/zc3XRzudyWE36ZBJr7PIkkqq0PFIrIBgp4ojqShI/newAnimation.json
-      {alt:'creditcard',  animData: data_creditcard,  unlocked: badges.creditcard,  key:'3'},
-      {alt:'radar',       animData: data_radar,       unlocked: badges.radar,       key:'4'},
-      {alt:'locked',                                  unlocked: false,              key:'5'}, 
-      {alt:'locked',                                  unlocked: false,              key:'6'},
-      {alt:'locked',                                  unlocked: false,              key:'7'},
-      {alt:'locked',                                  unlocked: false,              key:'8'},
-      {alt:'locked',                                  unlocked: false,              key:'9'},
-      {alt:'locked',                                  unlocked: false,              key:'10'},
-      {alt:'locked',                                  unlocked: false,              key:'11'},
-      {alt:'locked',                                  unlocked: false,              key:'12'},
+      {alt:'Student',     animData: data_student,     unlocked: badges.student,     key:'1'},
+      {alt:'Teacher',     animData: data_teacher,     unlocked: badges.teacher,     key:'2'}, //https://assets4.lottiefiles.com/datafiles/zc3XRzudyWE36ZBJr7PIkkqq0PFIrIBgp4ojqShI/newAnimation.json
+      {alt:'Businessman', animData: data_creditcard,  unlocked: badges.creditcard,  key:'3'},
+      {alt:'Navigator',   animData: data_radar,       unlocked: badges.radar,       key:'4'},
+      {alt:'Locked',                                  unlocked: false,              key:'5'}, 
+      {alt:'Locked',                                  unlocked: false,              key:'6'},
+      {alt:'Locked',                                  unlocked: false,              key:'7'},
+      {alt:'Locked',                                  unlocked: false,              key:'8'},
+      {alt:'Locked',                                  unlocked: false,              key:'9'},
+      {alt:'Locked',                                  unlocked: false,              key:'10'},
+      {alt:'Locked',                                  unlocked: false,              key:'11'},
+      {alt:'Locked',                                  unlocked: false,              key:'12'},
       ];
   var badgeList = nameList.map(function(name){
       return <BadgeBox src={name.src} alt={name.alt} animData={name.animData} unlocked={name.unlocked} key={name.key}/>

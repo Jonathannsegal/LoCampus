@@ -6,6 +6,7 @@ import {
   Flex,
   Text,
   useToast,
+  LightMode,
 } from '@chakra-ui/core';
 import { useSelector } from 'react-redux';
 import { withRedux } from '../src/lib/redux';
@@ -59,10 +60,10 @@ const Personal = () => {
         top="3%"
         left="5%"
         borderRadius="30px"
-        border="5px solid"
+        border="5px solid black"
         p="2%"
       >
-        <Text fontSize="30px">Bio</Text>
+        <Text fontSize="30px" color="black">Bio</Text>
       </Flex>
       <PostList color="purple.200" />
       <BadgeCase

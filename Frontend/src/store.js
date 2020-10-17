@@ -10,6 +10,7 @@ const initialState = {
     teacher: false,
     creditcard: false,
     radar: false,
+    daynight: false,
   }
 };
 

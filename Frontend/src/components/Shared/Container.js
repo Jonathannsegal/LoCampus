@@ -6,8 +6,13 @@ import {
   Flex,
   Box,
   IconButton,
+  useToast,
 } from '@chakra-ui/core';
 import styled from '@emotion/styled';
+
+import { useSelector } from 'react-redux';
+import { withRedux } from '../../lib/redux';
+import { useDispatch } from 'react-redux';
 
 const StickyNav = styled(Flex)`
   position: sticky;
@@ -16,9 +21,36 @@ const StickyNav = styled(Flex)`
   backdrop-filter: saturate(180%) blur(20px);
   transition: background-color 0.1 ease-in-out;
 `;
+const useContainer = () => {
+
+  const dispatch = useDispatch();
+  const setBadge = (badgeName, unlocked) =>
+      dispatch({
+          type: 'SET_BADGE',
+          payload: { badge: badgeName, unlocked: unlocked },
+      });
+
+  const badges = useSelector((state) => ({...state.badges}));
+  return { badges, setBadge };
+};
 
 const Container = ({ children }) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const { badges, setBadge } = useContainer();
+  const toast = useToast();
+
+  const colorButtonClicked = () => {
+    toggleColorMode();
+    if(!badges.daynight){
+      setBadge('daynight', true);
+      toast({
+        title: "\"Night Owl\" Badge Earned!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      })
+    }
+  };
 
   const bgColor = {
     light: '#ffffff',
@@ -52,7 +84,7 @@ const Container = ({ children }) => {
         <IconButton
           aria-label="Toggle dark mode"
           icon={colorMode === 'dark' ? 'sun' : 'moon'}
-          onClick={toggleColorMode}
+          onClick={colorButtonClicked}
         />
         <Box>
           <NextLink href="/badges" passHref>
@@ -93,4 +125,4 @@ const Container = ({ children }) => {
   );
 };
 
-export default Container;
+export default withRedux(Container);

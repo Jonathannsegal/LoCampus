@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Flex } from '@chakra-ui/core';
+import { Flex, useColorMode } from '@chakra-ui/core';
 import BadgeBox from '../components/BadgeBox';
 import { useSelector } from 'react-redux';
 import { withRedux } from '../lib/redux';
@@ -11,6 +11,7 @@ import data_building from '../../public/lotties/building.json'
 import data_chest from '../../public/lotties/chest.json'
 import data_clock from '../../public/lotties/clock.json'
 import data_creditcard from '../../public/lotties/creditcard.json'
+import data_daynight from '../../public/lotties/daynight.json'
 import data_dnalottie from '../../public/lotties/dna.json'
 import data_engineering from '../../public/lotties/engineering.json'
 import data_handshake from '../../public/lotties/handshake.json'
@@ -43,16 +44,20 @@ const useBadgeCase = () => {
 
 const BadgeCase = (props) => {
   
-  const { badges, setBadge } = useBadgeCase();
-
+    const { badges, setBadge } = useBadgeCase();
+    const { colorMode } = useColorMode();
+    const badgeText = {
+      light: 'Early Bird',
+      dark: 'Night Owl',
+    };
   //useEffect(() => {setBadge('student', false)}, []);
 
   var nameList = [
-      {alt:'Student',     animData: data_student,     unlocked: badges.student,     key:'1'},
-      {alt:'Teacher',     animData: data_teacher,     unlocked: badges.teacher,     key:'2'}, //https://assets4.lottiefiles.com/datafiles/zc3XRzudyWE36ZBJr7PIkkqq0PFIrIBgp4ojqShI/newAnimation.json
-      {alt:'Businessman', animData: data_creditcard,  unlocked: badges.creditcard,  key:'3'},
-      {alt:'Navigator',   animData: data_radar,       unlocked: badges.radar,       key:'4'},
-      {alt:'Locked',                                  unlocked: false,              key:'5'}, 
+      {alt:'Student',               animData: data_student,     unlocked: badges.student,     key:'1'},
+      {alt:'Teacher',               animData: data_teacher,     unlocked: badges.teacher,     key:'2'}, //https://assets4.lottiefiles.com/datafiles/zc3XRzudyWE36ZBJr7PIkkqq0PFIrIBgp4ojqShI/newAnimation.json
+      {alt:'Businessman',           animData: data_creditcard,  unlocked: badges.creditcard,  key:'3'},
+      {alt:'Navigator',             animData: data_radar,       unlocked: badges.radar,       key:'4'},
+      {alt: badgeText[colorMode],   animData: data_daynight,    unlocked: badges.daynight,    key:'5'}, 
       {alt:'Locked',                                  unlocked: false,              key:'6'},
       {alt:'Locked',                                  unlocked: false,              key:'7'},
       {alt:'Locked',                                  unlocked: false,              key:'8'},

@@ -1,8 +1,10 @@
 import React from 'react';
 import Header from '../src/components/header'
-const Location = () => (
-  <Header 
+import Container from '../src/components/Shared/Container';
 
+const Location = () => (
+  <Container>
+  <Header 
   school = "Iowa State University" 
   color = "red.500"
   image ="https://www.commonapp.org/static/b0b82a6b48ae23b1665cd5deda0bc94e-249d7ea8a511a7d0d7591e9c679fe8b8.jpg"
@@ -24,6 +26,7 @@ const Location = () => (
 
   type = "location"
 />
+</Container>
 );
 
 export default Location;

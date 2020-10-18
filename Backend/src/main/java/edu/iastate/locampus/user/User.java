@@ -1,6 +1,8 @@
 package edu.iastate.locampus.user;
 
+import edu.iastate.locampus.role.Role;
 import edu.iastate.locampus.util.IntegerSetConverter;
+import edu.iastate.locampus.util.StringSetConverter;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import javax.persistence.*;
@@ -34,11 +36,13 @@ public class User {
 
     @Column(name = "badges")
     @NotFound(action = NotFoundAction.IGNORE)
-    private String[] badges;
+    @Convert(converter = StringSetConverter.class)
+    private Set<String> badges;
 
-    @Column(name = "role")
+    @Column(name = "roles")
     @NotFound(action = NotFoundAction.IGNORE)
-    private String role;
+    @Convert(converter = StringSetConverter.class)
+    private Set<String> roles;
 
     @Column(name = "bio")
     @NotFound(action = NotFoundAction.IGNORE)
@@ -95,16 +99,20 @@ public class User {
         this.verify = verify;
     }
 
-    public String[] getBadges() {
+    public Set<String> getBadges() {
         return badges;
     }
 
-    public String getRole() {
-        return role;
+    public Set<String> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public boolean addRole(String role) {
+        return roles.add(role);
+    }
+
+    public boolean removeRole(String role) {
+        return roles.remove(role);
     }
 
     public String getBio() {

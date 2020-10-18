@@ -1,11 +1,10 @@
 package edu.iastate.locampus.user;
 
+import edu.iastate.locampus.util.IntegerSetConverter;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
-
 import javax.persistence.*;
-import java.util.UUID;
-import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -47,15 +46,18 @@ public class User {
 
     @Column(name = "posts")
     @NotFound(action = NotFoundAction.IGNORE)
-    private HashSet<Integer> posts;
+    @Convert(converter = IntegerSetConverter.class)
+    private Set<Integer> posts;
 
     @Column(name = "followers")
     @NotFound(action = NotFoundAction.IGNORE)
-    private HashSet<Integer> followers;
+    @Convert(converter = IntegerSetConverter.class)
+    private Set<Integer> followers;
 
     @Column(name = "followedBy")
     @NotFound(action = NotFoundAction.IGNORE)
-    private HashSet<Integer> followedBy;
+    @Convert(converter = IntegerSetConverter.class)
+    private Set<Integer> followedBy;
 
     public Integer getId() {
         return id;
@@ -113,7 +115,7 @@ public class User {
         this.bio = bio;
     }
 
-    public HashSet<Integer> getPosts() {
+    public Set<Integer> getPosts() {
         return posts;
     }
 
@@ -125,11 +127,11 @@ public class User {
         return followedBy.add(followedId);
     }
 
-    public HashSet<Integer> getFollowers() {
+    public Set<Integer> getFollowers() {
         return followers;
     }
 
-    public HashSet<Integer> getFollowedBy() {
+    public Set<Integer> getFollowedBy() {
         return followedBy;
     }
 

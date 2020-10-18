@@ -36,7 +36,7 @@ public class Post {
     @NotFound(action = NotFoundAction.IGNORE)
     private String location;
 
-    @Column(name = "rank")
+    @Column(name = "`rank`")
     @NotFound(action = NotFoundAction.IGNORE)
     private Integer rank;
 

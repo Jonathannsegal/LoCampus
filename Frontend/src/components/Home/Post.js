@@ -7,9 +7,9 @@ import {
   Stack,
   Flex,
   Divider,
-  IconButton,
-  ButtonGroup
+  IconButton
 } from '@chakra-ui/core';
+import makeVote from '../../app/util/makeVote';
 
 export default (props) => {
   return (
@@ -27,9 +27,9 @@ export default (props) => {
 
             <Flex>
               <Stack isInline spacing={2} align="center">
-                <IconButton aria-label="upvote" icon="arrow-up" />
-                <Text>123</Text>
-                <IconButton aria-label="downvote" icon="arrow-down" />
+                <IconButton aria-label="upvote" icon="arrow-up" onClick={() => makeVote(props.key, "up")} />
+                <Text>{props.rating}</Text>
+                <IconButton aria-label="downvote" icon="arrow-down" onClick={() => makeVote(props.key, "down")} />
               </Stack>
             </Flex>
           </Flex>

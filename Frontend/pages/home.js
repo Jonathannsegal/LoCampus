@@ -96,6 +96,7 @@ const Home = () => {
                 <Post
                   key={c.timestamp}
                   author={c.author}
+                  rating="23"
                   content={c.content}
                 />
               ))}

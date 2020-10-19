@@ -9,6 +9,8 @@ import {
   Button,
   Stack,
   Text,
+  Flex,
+  Image,
   FormErrorMessage,
 } from '@chakra-ui/core';
 import getPosts from '../src/app/util/getPosts';
@@ -26,11 +28,22 @@ const Home = () => {
   const { username } = useHome();
   const [state, setState] = useState([]);
   useEffect(() => {
-    getPosts().then(result => setState(result));
+    // getPosts().then(result => setState(result));
   }, []);
 
   return (
     <Container>
+      <Box
+        border="1px solid #E8EAED"
+        borderRadius="8px"
+        boxshadow="0 2px 4px rgba(0,0,0,0.3)"
+        mb={4}
+        h="250px"
+        backgroundImage="url('https://www.commonapp.org/static/249d7ea8a511a7d0d7591e9c679fe8b8/iowa-state-university_1047.jpg')"
+        backgroundPosition="bottom"
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
+      />
       <Box
         border="1px solid #E8EAED"
         borderRadius="8px"
@@ -73,8 +86,10 @@ const Home = () => {
             </form>
           )}
         </Formik>
-        <Box m="auto" w="40vw">
-          <Stack spacing={4} shouldWrapChildren>
+      </Box>
+      <Flex maxW="800px" flexShrink="0" flexDirection="row" m="auto">
+        {/* <Flex flexShrink="0" m="auto"> */}
+          <Stack maxW="800px" mt="4" spacing={4} shouldWrapChildren>
             {state
               .sort((a, b) => b.timestamp - a.timestamp)
               .map((c) => (
@@ -85,8 +100,17 @@ const Home = () => {
                 />
               ))}
           </Stack>
-        </Box>
-      </Box>
+        {/* </Flex> */}
+        {/* <Flex flexShrink="0" mx="auto" mt="4">
+          <Stack mt="4" spacing={4} shouldWrapChildren>
+            <Post
+              key="0"
+              author="je;;p0"
+              content="alskjdh"
+            />
+          </Stack>
+        </Flex> */}
+      </Flex>
     </Container>
   );
 };

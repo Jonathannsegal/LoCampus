@@ -10,6 +10,10 @@ public class IntegerSetConverter implements AttributeConverter<Set<Integer>, Str
 
     @Override
     public String convertToDatabaseColumn(Set<Integer> integers) {
+        if (integers == null) {
+            return "";
+        }
+
         String result = "";
 
         for (Integer integer : integers) {
@@ -29,7 +33,11 @@ public class IntegerSetConverter implements AttributeConverter<Set<Integer>, Str
         Set<Integer> result = new HashSet<>();
 
         for (String str : strings) {
-            result.add(Integer.valueOf(str));
+            try {
+                result.add(Integer.valueOf(str));
+            } catch (NumberFormatException e) {
+                // do nothing
+            }
         }
 
         return result;

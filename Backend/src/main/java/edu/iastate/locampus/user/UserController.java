@@ -2,12 +2,21 @@ package edu.iastate.locampus.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import edu.iastate.locampus.Utils;
+import edu.iastate.locampus.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 public class UserController {
@@ -17,6 +26,9 @@ public class UserController {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private AuthenticationManager authManager;
 
     private JsonParser parser = JsonParserFactory.getJsonParser();
 
@@ -33,6 +45,19 @@ public class UserController {
 
         userRepository.save(user);
         return "Name " + user.getName() + " Email " + user.getEmail() + " Integer " + user.getId();
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping("/user/auth")
+    public void authenticateUser(@RequestBody Map<String, String> body) {
+        Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(body.get("username"), body.get("password")));
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        String jwt = Utils.getJWTToken(auth);
+
+        UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -54,7 +79,7 @@ public class UserController {
     @RequestMapping("/user/{userId}/role")
     public ObjectNode getRole(@PathVariable("userId") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
-        objectNode.put("role", userRepository.getOne(userId).getRole());
+        objectNode.set("role", objectMapper.valueToTree(userRepository.getOne(userId).getRoles()));
         return objectNode;
     }
 
@@ -69,7 +94,6 @@ public class UserController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/{userId}/setbio")
     public void setBio(@PathVariable("userId") Integer userId, @RequestBody String bio) {
-        System.out.println(userRepository.getOne(userId));
         userRepository.getOne(userId).setBio((String) parser.parseMap(bio).get("bio"));
     }
 

@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,9 @@ public class UserController {
     @Autowired
     private AuthenticationManager authManager;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     private JsonParser parser = JsonParserFactory.getJsonParser();
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -42,6 +46,8 @@ public class UserController {
         if (!user.getPassword().equals(user.getVerify())) {
             return null;
         }
+
+        user.setPassword(encoder.encode(user.getPassword()));
 
         userRepository.save(user);
         return "Name " + user.getName() + " Email " + user.getEmail() + " Integer " + user.getId();

@@ -55,15 +55,12 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/auth")
-    public void authenticateUser(@RequestBody Map<String, String> body) {
+    public ObjectNode authenticate(@RequestBody Map<String, String> body) {
         Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(body.get("username"), body.get("password")));
         SecurityContextHolder.getContext().setAuthentication(auth);
-        String jwt = Utils.getJWTToken(auth);
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
+        ObjectNode objectNode = objectMapper.createObjectNode();
+        objectNode.put("jwt", Utils.getJWTToken(auth));
+        return objectNode;
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user")
+@Table(name = "location")
 public class Location {
 
     @Id

@@ -1,5 +1,6 @@
 package edu.iastate.locampus.role;
 
+import edu.iastate.locampus.util.StringSetConverter;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -17,6 +18,7 @@ public class Role {
 
     @Column(name = "permissions")
     @NotFound(action = NotFoundAction.IGNORE)
+    @Convert(converter = StringSetConverter.class)
     private Set<Permission> permissions;
 
     public String getName() {

@@ -1,11 +1,12 @@
 package edu.iastate.locampus.user;
 
+import edu.iastate.locampus.role.Role;
+import edu.iastate.locampus.util.IntegerSetConverter;
+import edu.iastate.locampus.util.StringSetConverter;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
-
 import javax.persistence.*;
-import java.util.UUID;
-import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -35,11 +36,13 @@ public class User {
 
     @Column(name = "badges")
     @NotFound(action = NotFoundAction.IGNORE)
-    private String[] badges;
+    @Convert(converter = StringSetConverter.class)
+    private Set<String> badges;
 
-    @Column(name = "role")
+    @Column(name = "roles")
     @NotFound(action = NotFoundAction.IGNORE)
-    private String role;
+    @Convert(converter = StringSetConverter.class)
+    private Set<String> roles;
 
     @Column(name = "bio")
     @NotFound(action = NotFoundAction.IGNORE)
@@ -47,15 +50,18 @@ public class User {
 
     @Column(name = "posts")
     @NotFound(action = NotFoundAction.IGNORE)
-    private HashSet<Integer> posts;
+    @Convert(converter = IntegerSetConverter.class)
+    private Set<Integer> posts;
 
     @Column(name = "followers")
     @NotFound(action = NotFoundAction.IGNORE)
-    private HashSet<Integer> followers;
+    @Convert(converter = IntegerSetConverter.class)
+    private Set<Integer> followers;
 
     @Column(name = "followedBy")
     @NotFound(action = NotFoundAction.IGNORE)
-    private HashSet<Integer> followedBy;
+    @Convert(converter = IntegerSetConverter.class)
+    private Set<Integer> followedBy;
 
     public Integer getId() {
         return id;
@@ -93,16 +99,20 @@ public class User {
         this.verify = verify;
     }
 
-    public String[] getBadges() {
+    public Set<String> getBadges() {
         return badges;
     }
 
-    public String getRole() {
-        return role;
+    public Set<String> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public boolean addRole(String role) {
+        return roles.add(role);
+    }
+
+    public boolean removeRole(String role) {
+        return roles.remove(role);
     }
 
     public String getBio() {
@@ -113,7 +123,7 @@ public class User {
         this.bio = bio;
     }
 
-    public HashSet<Integer> getPosts() {
+    public Set<Integer> getPosts() {
         return posts;
     }
 
@@ -125,11 +135,11 @@ public class User {
         return followedBy.add(followedId);
     }
 
-    public HashSet<Integer> getFollowers() {
+    public Set<Integer> getFollowers() {
         return followers;
     }
 
-    public HashSet<Integer> getFollowedBy() {
+    public Set<Integer> getFollowedBy() {
         return followedBy;
     }
 

@@ -3,7 +3,6 @@ package edu.iastate.locampus.user;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import edu.iastate.locampus.Utils;
-import edu.iastate.locampus.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
@@ -14,10 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 public class UserController {
@@ -34,7 +30,7 @@ public class UserController {
     @Autowired
     private PasswordEncoder encoder;
 
-    private JsonParser parser = JsonParserFactory.getJsonParser();
+    private final JsonParser parser = JsonParserFactory.getJsonParser();
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/register")
@@ -73,7 +69,7 @@ public class UserController {
     @RequestMapping("/user/{userid}/exists")
     public ObjectNode exists(@PathVariable("userid") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
-        boolean exists = (userRepository.findById(userId).orElse(null) != null) ? true : false;
+        boolean exists = userRepository.findById(userId).orElse(null) != null;
         objectNode.put("exists", exists);
         return objectNode;
     }

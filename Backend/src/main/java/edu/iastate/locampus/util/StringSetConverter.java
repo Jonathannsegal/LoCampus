@@ -18,7 +18,7 @@ public class StringSetConverter implements AttributeConverter<Set<String>, Strin
         String result = "";
 
         for (String string : strings) {
-            result += string.toString() + ".";
+            result += string + ".";
         }
 
         if (result.length() > 0 && result.charAt(result.length() - 1) == '.') {

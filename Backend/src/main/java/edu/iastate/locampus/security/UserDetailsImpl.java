@@ -7,9 +7,11 @@ import java.util.Collection;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private Integer id;
-    private String name, email, password;
-    private Collection<? extends GrantedAuthority> authorities;
+    private final Integer id;
+    private final String name;
+    private final String email;
+    private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(Integer id, String name, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;

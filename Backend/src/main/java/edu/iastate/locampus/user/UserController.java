@@ -122,4 +122,30 @@ public class UserController {
         userRepository.getOne(followerId).addFollower(followedId);
         userRepository.getOne(followedId).addFollowedBy(followerId);
     }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping("/user/{requesteeeId}/requestfriend/{requestorId}")
+    public void requestFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
+        userRepository.getOne(requesteeeId).addFriendRequest(requestorId);
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping("/user/{requesteeeId}/removerequestfriend/{requestorId}")
+    public void removeRequestFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
+        userRepository.getOne(requesteeeId).removeFriendRequest(requestorId);
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping("/user/{requesteeeId}/addfriend/{requestorId}")
+    public void addFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
+        User requestee = userRepository.getOne(requesteeeId);
+        requestee.removeFriendRequest(requestorId);
+        requestee.addFriend(requestorId);
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping("/user/{requesteeeId}/removefriend/{requestorId}")
+    public void acceptFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
+        userRepository.getOne(requesteeeId).removeFriend(requestorId);
+    }
 }

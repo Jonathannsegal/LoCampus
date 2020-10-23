@@ -1,6 +1,5 @@
 package edu.iastate.locampus.user;
 
-import edu.iastate.locampus.role.Role;
 import edu.iastate.locampus.util.IntegerSetConverter;
 import edu.iastate.locampus.util.StringSetConverter;
 import org.hibernate.annotations.NotFound;
@@ -62,6 +61,16 @@ public class User {
     @NotFound(action = NotFoundAction.IGNORE)
     @Convert(converter = IntegerSetConverter.class)
     private Set<Integer> followedBy;
+
+    @Column(name = "friendRequests")
+    @NotFound(action = NotFoundAction.IGNORE)
+    @Convert(converter = IntegerSetConverter.class)
+    private Set<Integer> friendRequests;
+
+    @Column(name = "friends")
+    @NotFound(action = NotFoundAction.IGNORE)
+    @Convert(converter = IntegerSetConverter.class)
+    private Set<Integer> friends;
 
     public Integer getId() {
         return id;
@@ -141,6 +150,30 @@ public class User {
 
     public Set<Integer> getFollowedBy() {
         return followedBy;
+    }
+
+    public boolean addFriendRequest(Integer requestorId) {
+        return friendRequests.add(requestorId);
+    }
+
+    public boolean removeFriendRequest(Integer requestorId) {
+        return friendRequests.remove(requestorId);
+    }
+
+    public Set<Integer> getFriendRequests() {
+        return friendRequests;
+    }
+
+    public boolean addFriend(Integer friendId) {
+        return friendRequests.add(friendId);
+    }
+
+    public boolean removeFriend(Integer friendId) {
+        return friendRequests.remove(friendId);
+    }
+
+    public Set<Integer> getFriends() {
+        return friendRequests;
     }
 
     public String toString() {

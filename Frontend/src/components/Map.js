@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import MapGl from 'react-map-gl';
+import MapGl, {GeolocateControl} from 'react-map-gl';
+import LOCATIONS from '../../public/locations.json';
+import Pins from './pins';
+
 
 class Map extends Component {
   constructor(props) {
@@ -10,10 +13,13 @@ class Map extends Component {
         height: '100%',
         latitude: 42.0266573,
         longitude: -93.6456403,
-        zoom: 14,
+        zoom: 8,
       },
     };
   }
+    _onClickMarker = location => {
+      //this.setState({popupInfo: location});
+    };
 
   render() {
     return (
@@ -22,7 +28,16 @@ class Map extends Component {
         mapStyle="mapbox://styles/mapbox/satellite-v9"
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         onViewportChange={(viewport) => this.setState({ viewport })}
-      />
+      >
+        <Pins data={LOCATIONS} onClick={this._onClickMarker} />
+        <GeolocateControl
+          //fitBoundsOptions={{maxZoom: 17}}
+          auto={true}
+          positionOptions={{enableHighAccuracy: true}}
+          trackUserLocation={true}
+          showUserLocation={true}
+        />
+      </MapGl>
     );
   }
 }

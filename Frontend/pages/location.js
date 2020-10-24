@@ -1,8 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { geolocated } from "react-geolocated";
+
+import { useSelector } from 'react-redux';
+import { withRedux } from '../src/lib/redux';
+import { useDispatch } from 'react-redux';
+
 import Header from '../src/components/header'
 import Container from '../src/components/Shared/Container';
+import Map from '../src/components/Map';
+import GeolocationMap from '../src/components/GeolocationMap';
+import {  Flex, useToast  } from '@chakra-ui/core';
+import locationMap from '../public/locations.json'
 
-const Location = () => (
+const useLocation = () => {
+
+  const dispatch = useDispatch();
+  const setBadge = (badgeName, unlocked) =>
+      dispatch({
+          type: 'SET_BADGE',
+          payload: { badge: badgeName, unlocked: unlocked },
+      });
+
+  const badges = useSelector((state) => ({...state.badges}));
+  return { badges, setBadge };
+};
+
+
+const Location = ({coords}) => {
+  
+  //alert(coords);
+
+  const { badges, setBadge } = useLocation();
+  const toast = useToast();
+  const locations = locationMap;
+
+  if(coords){
+  const { latitude, longitude } = coords;
+  locations.forEach(location => {
+    if(Math.abs(location.longitude - longitude) < 0.0003 && Math.abs(location.latitude - latitude) < 0.0003){
+      if(!badges.radar){
+        setBadge('radar', true);
+        toast({
+          title: "\"Navigator\" Badge Earned!",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+    }
+  });
+  }
+
+  return (
   <Container>
   <Header 
   school = "Iowa State University" 
@@ -26,7 +75,17 @@ const Location = () => (
 
   type = "location"
 />
-</Container>
-);
+<Flex display="block" width="100vw" h="60vh" bg="yellow.500">
+  <Map />
+</Flex>
 
-export default Location;
+</Container>
+)};
+
+
+export default geolocated({
+  positionOptions: {
+      enableHighAccuracy: true,
+  },
+  userDecisionTimeout: 5000,
+})(withRedux(Location));

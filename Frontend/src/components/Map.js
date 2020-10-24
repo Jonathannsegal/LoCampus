@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MapGl, {GeolocateControl} from 'react-map-gl';
 import LOCATIONS from '../../public/locations.json';
-import Pins from './pins';
+import Pins from './Pins';
 
 
 class Map extends Component {

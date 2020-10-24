@@ -6,6 +6,7 @@ import edu.iastate.locampus.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -61,12 +62,14 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/{userId}/delete")
+    @PreAuthorize("hasAuthority('USER_DELETE')")
     public void deleteUser(@PathVariable("userId") Integer userId) {
         userRepository.delete(userRepository.getOne(userId));
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userid}/exists")
+    @PreAuthorize("hasAuthority('USER_EXISTS')")
     public ObjectNode exists(@PathVariable("userid") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
         boolean exists = userRepository.findById(userId).orElse(null) != null;
@@ -76,6 +79,7 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userId}/role")
+    @PreAuthorize("hasAuthority('USER_GET_ROLES')")
     public ObjectNode getRole(@PathVariable("userId") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
         objectNode.set("role", objectMapper.valueToTree(userRepository.getOne(userId).getRoles()));
@@ -84,6 +88,7 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userid}/badges")
+    @PreAuthorize("hasAuthority('USER_GET_BADGES')")
     public ObjectNode getBadges(@PathVariable("userId") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
         objectNode.set("badges", objectMapper.valueToTree(userRepository.getOne(userId).getBadges()));
@@ -92,12 +97,14 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/{userId}/setbio")
+    @PreAuthorize("hasAuthority('USER_SET_BIO')")
     public void setBio(@PathVariable("userId") Integer userId, @RequestBody String bio) {
         userRepository.getOne(userId).setBio((String) parser.parseMap(bio).get("bio"));
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userId}/bio")
+    @PreAuthorize("hasAuthority('USER_GET_BIO')")
     public ObjectNode getBio(@PathVariable("userId") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
         objectNode.put("bio", userRepository.getOne(userId).getBio());
@@ -106,6 +113,7 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{userid}/posts")
+    @PreAuthorize("hasAuthority('USER_GET_POSTS')")
     public ObjectNode getPosts(@PathVariable("userid") Integer userId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
         objectNode.set("posts", objectMapper.valueToTree(userRepository.getOne(userId).getPosts()));
@@ -114,6 +122,7 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{followerid}/{followedid}")
+    @PreAuthorize("hasAuthority('USER_SET_FOLLOWERS')")
     public void setFollower(@PathVariable("followerid") Integer followerId, @PathVariable("followedid") Integer followedId) {
         userRepository.getOne(followerId).addFollower(followedId);
         userRepository.getOne(followedId).addFollowedBy(followerId);
@@ -121,18 +130,21 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{requesteeeId}/requestfriend/{requestorId}")
+    @PreAuthorize("hasAuthority('USER_REQUEST_FRIEND')")
     public void requestFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
         userRepository.getOne(requesteeeId).addFriendRequest(requestorId);
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{requesteeeId}/removerequestfriend/{requestorId}")
+    @PreAuthorize("hasAuthority('USER_REM_REQUEST_FRIEND')")
     public void removeRequestFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
         userRepository.getOne(requesteeeId).removeFriendRequest(requestorId);
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{requesteeeId}/addfriend/{requestorId}")
+    @PreAuthorize("hasAuthority('USER_ADD_FRIEND')")
     public void addFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
         User requestee = userRepository.getOne(requesteeeId);
         requestee.removeFriendRequest(requestorId);
@@ -141,6 +153,7 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{requesteeeId}/removefriend/{requestorId}")
+    @PreAuthorize("hasAuthority('USER_ACCEPT_FRIEND')")
     public void acceptFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
         userRepository.getOne(requesteeeId).removeFriend(requestorId);
     }

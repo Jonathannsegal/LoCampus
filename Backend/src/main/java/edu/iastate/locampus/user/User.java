@@ -72,6 +72,13 @@ public class User {
     @Convert(converter = IntegerSetConverter.class)
     private Set<Integer> friends;
 
+    public User(String name, String email, String password, String verify) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.verify = verify;
+    }
+
     public Integer getId() {
         return id;
     }

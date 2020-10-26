@@ -36,9 +36,13 @@ public class Post {
     @NotFound(action = NotFoundAction.IGNORE)
     private String location;
 
-    @Column(name = "`rank`")
+    @Column(name = "rank")
     @NotFound(action = NotFoundAction.IGNORE)
     private Integer rank;
+
+    public Post() {
+        this.rank = 0;
+    }
 
     public UUID getId() {
         return id;

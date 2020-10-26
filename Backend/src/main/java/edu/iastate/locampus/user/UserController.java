@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -36,7 +37,8 @@ public class UserController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/register")
     public String createUser(@RequestBody User user) {
-        if (user.getEmail() == null || user.getName() == null || user.getPassword() == null || user.getVerify() == null) {
+        if (user.getEmail() == null || user.getName() == null || user.getPassword() == null
+                || user.getVerify() == null) {
             return null;
         }
 
@@ -53,11 +55,20 @@ public class UserController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/auth")
     public ObjectNode authenticate(@RequestBody Map<String, String> body) {
-        Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(body.get("username"), body.get("password")));
+        Authentication auth = authManager
+                .authenticate(new UsernamePasswordAuthenticationToken(body.get("username"), body.get("password")));
         SecurityContextHolder.getContext().setAuthentication(auth);
         ObjectNode objectNode = objectMapper.createObjectNode();
         objectNode.put("jwt", Utils.getJWTToken(auth));
         return objectNode;
+    }
+
+    // @PreAuthorize("hasAuthority('USER_LIST')")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.GET, path = "/user/list")
+    public List<User> getAllUsers() {
+        List<User> results = userRepository.findAll();
+        return results;
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")

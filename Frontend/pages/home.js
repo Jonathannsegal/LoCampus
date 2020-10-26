@@ -14,10 +14,13 @@ import {
   FormErrorMessage,
 } from '@chakra-ui/core';
 import getPosts from '../src/app/util/getPosts';
+import getUsers from '../src/app/util/getUsers';
 import makePost from '../src/app/util/makePost';
 import { withRedux } from '../src/lib/redux';
 import Container from '../src/components/Shared/Container';
 import Post from '../src/components/Home/Post';
+import Friend from '../src/components/Home/Friend';
+
 
 const useHome = () => {
   const username = useSelector((state) => state.username);
@@ -26,9 +29,11 @@ const useHome = () => {
 
 const Home = () => {
   const { username } = useHome();
-  const [state, setState] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
   useEffect(() => {
-    // getPosts().then(result => setState(result));
+    getPosts().then(result => setPosts(result));
+    getUsers().then(result => setUsers(result));
   }, []);
 
   return (
@@ -44,6 +49,27 @@ const Home = () => {
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
       />
+
+      <Box
+        border="1px solid #E8EAED"
+        borderRadius="8px"
+        boxshadow="0 2px 4px rgba(0,0,0,0.3)"
+        bg="white"
+        mb={4}
+        color="black"
+      >
+        <Stack mt="4" mb="4">
+          {users
+            .map((c) => (
+              <Friend
+                id={c.id}
+                me={1}
+                name={c.name}
+              />
+            ))}
+        </Stack>
+      </Box>
+
       <Box
         border="1px solid #E8EAED"
         borderRadius="8px"
@@ -55,7 +81,7 @@ const Home = () => {
         <Formik
           initialValues={{ author: username, content: '' }}
           onSubmit={(values) => {
-            setState((state) => [values, ...state]);
+            setPosts((posts) => [values, ...posts]);
             const location = 'Iowa State';
             makePost(username, values.content, location, Date());
           }}
@@ -87,30 +113,20 @@ const Home = () => {
           )}
         </Formik>
       </Box>
+
       <Flex maxW="800px" flexShrink="0" flexDirection="row" m="auto">
-        {/* <Flex flexShrink="0" m="auto"> */}
-          <Stack maxW="800px" mt="4" spacing={4} shouldWrapChildren>
-            {state
-              .sort((a, b) => b.timestamp - a.timestamp)
-              .map((c) => (
-                <Post
-                  key={c.timestamp}
-                  author={c.author}
-                  rating="23"
-                  content={c.content}
-                />
-              ))}
-          </Stack>
-        {/* </Flex> */}
-        {/* <Flex flexShrink="0" mx="auto" mt="4">
-          <Stack mt="4" spacing={4} shouldWrapChildren>
-            <Post
-              key="0"
-              author="je;;p0"
-              content="alskjdh"
-            />
-          </Stack>
-        </Flex> */}
+        <Stack maxW="800px" mt="4" spacing={4} shouldWrapChildren>
+          {posts
+            .sort((a, b) => b.timestamp - a.timestamp)
+            .map((c) => (
+              <Post
+                key={c.id}
+                author={c.author}
+                rating={c.rank}
+                content={c.content}
+              />
+            ))}
+        </Stack>
       </Flex>
     </Container>
   );

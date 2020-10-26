@@ -20,9 +20,9 @@ public class PostController {
     private final JsonParser parser = JsonParserFactory.getJsonParser();
     private final Logger logger = LoggerFactory.getLogger(PostController.class);
 
+    // @PreAuthorize("hasAuthority('POST_CREATE')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(method = RequestMethod.POST, path = "/post/new")
-    @PreAuthorize("hasAuthority('POST_CREATE')")
     public String createPost(@RequestBody Post post) {
         postRepository.save(post);
         return post.toString();
@@ -59,13 +59,13 @@ public class PostController {
         // add logic to check if user is authenticated
     }
 
+    // @PreAuthorize("hasAuthority('POST_LIST')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(method = RequestMethod.GET, path = "/post")
-    @PreAuthorize("hasAuthority('POST_LIST')")
     public List<Post> getAllPosts() {
-        logger.info("Entered into Controller Layer");
+        // logger.info("Entered into Controller Layer");
         List<Post> results = postRepository.findAll();
-        logger.info("Number of Records Fetched:" + results.size());
+        // logger.info("Number of Records Fetched:" + results.size());
         return results;
     }
 }

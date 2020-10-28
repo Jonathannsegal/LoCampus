@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState} from 'react';
 import {
   Box,
   Heading,
@@ -6,7 +6,9 @@ import {
   Flex,
   Text,
   useToast,
-  LightMode,
+  LightMode, 
+  Button,
+  Textarea 
 } from '@chakra-ui/core';
 import { useSelector } from 'react-redux';
 import { withRedux } from '../src/lib/redux';
@@ -17,6 +19,7 @@ import BadgeCase from '../src/components/BadgeCase';
 import PersonalHeading from '../src/components/PersonalHeading';
 import PostList from '../src/components/PostList';
 import Container from '../src/components/Shared/Container';
+//import Searchbar from '../src/components/Shared/searchbar'
 
 const usePersonal = () => {
 
@@ -26,15 +29,24 @@ const usePersonal = () => {
           type: 'SET_BADGE',
           payload: { badge: badgeName, unlocked: unlocked },
       });
+      const setBio = (input) =>
+      dispatch({
+        type : 'SET_BIO',
+        payload: { txt: input},
+      });
 
   const badges = useSelector((state) => ({...state.badges}));
-  return { badges, setBadge };
+  const bio = useSelector((state) => state.bio);
+  return { badges, setBadge, bio, setBio };
 };
 
 
+
 const Personal = () => {
-  const { badges, setBadge } = usePersonal();
+  const { badges, setBadge, bio, setBio} = usePersonal();
   const toast = useToast();
+  const [userBio, setUserBio] = useState("");
+  const handleChangeBio = event => setUserBio(event.target.value);
 
   useEffect(() => {
     if(!badges.student){
@@ -50,6 +62,7 @@ const Personal = () => {
 
   return (
   <Container>
+    
     <PersonalHeading />
     <Flex bg="green.200" w="100vw" h="2000px" position="relative">
       <Flex
@@ -63,7 +76,23 @@ const Personal = () => {
         border="5px solid black"
         p="2%"
       >
-        <Text fontSize="30px" color="black">Bio</Text>
+        <Text fontSize="30px" color="black">Bio<br/></Text>
+        <Textarea
+        position="absolute"
+        top="22%"
+        w = "92%"
+        h = "58%"
+        value = {userBio}
+        onChange = {handleChangeBio}
+       placeholder = "Write bio and click Set Bio to save!">
+        
+          </Textarea>
+        <Button 
+        onClick = {() => setBio(userBio)}
+        position="absolute"
+        bottom="3%"
+        w = "92%">
+          Set Bio</Button>
       </Flex>
       <PostList color="purple.200" />
       <BadgeCase

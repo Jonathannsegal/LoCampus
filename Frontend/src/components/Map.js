@@ -26,7 +26,7 @@ class Map extends Component {
       <MapGl
         {...this.state.viewport}
         mapStyle="mapbox://styles/mapbox/satellite-v9"
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapboxApiAccessToken='pk.eyJ1IjoiYWRlaWNrIiwiYSI6ImNrZWVyeDR0dTAzNjYyd3BpNG95MnJtbmEifQ.EPFDghB0Ml_eeduUbERUlg'
         onViewportChange={(viewport) => this.setState({ viewport })}
       >
         <Pins data={LOCATIONS} onClick={this._onClickMarker} />

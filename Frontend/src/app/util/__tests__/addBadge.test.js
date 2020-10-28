@@ -5,40 +5,32 @@ beforeEach(() => {
     fetchMock.doMock()
 })
 
-it("Add Badge", async () => {
+it("Add Badges", async () => {
     fetchMock.mockOnce({
         routes: [{
-                name: 'PostSuccess',
-                matcher: function(url) {
-                    return (url=="https://localhost");
-                },
-                response: {  
-                    result:{
-                        message: "Successful", 
-                    }
+            name: 'PostSuccess',
+            matcher: function (url) {
+                return (url == "https://localhost");
+            },
+            response: {
+                result: {
+                    message: "Successful",
                 }
-            }, {
-                name: 'PostFail',
-                matcher: function(url) {
-                    return (url=="https://localhost");
-                },
-                response: { 
-                    result:{
-                        message: "Unsuccessful"
-                    }
+            }
+        }, {
+            name: 'PostFail',
+            matcher: function (url) {
+                return (url == "https://localhost");
+            },
+            response: {
+                result: {
+                    message: "Unsuccessful"
                 }
+            }
         }]
     });
 
-    const badge = await addBadge("username", 
-        {
-            student: false,
-            teacher: false,
-            creditcard: false,
-            radar: false,
-            daynight: false,
-        }
-    , "date");
+    const badge = await addBadge("username", "student", "date");
 
     expect(badge).toEqual(200);
 });

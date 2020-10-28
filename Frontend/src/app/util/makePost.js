@@ -11,7 +11,8 @@ async function makePost(username, content, location, date) {
             author: username,
             content: content,
             location: location,
-            timestamp: date
+            timestamp: date,
+            rank: 0
         })
     })
         .then((res) => {

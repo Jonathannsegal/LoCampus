@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/core';
 import makeVote from '../../app/util/makeVote';
 
-export default (props) => {
+const Post = (props) => {
   return (
     <>
       <Box borderWidth="1px" rounded="lg" p="10px">
@@ -41,3 +41,5 @@ export default (props) => {
     </>
   );
 };
+
+export default Post;

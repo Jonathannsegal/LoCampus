@@ -50,7 +50,7 @@ const BadgeCase = (props) => {
       light: 'Early Bird',
       dark: 'Night Owl',
     };
-  //useEffect(() => {setBadge('student', false)}, []);
+  //useEffect(() => {setBadge('radar', false)}, []);
 
   var nameList = [
       {alt:'Student',               animData: data_student,     unlocked: badges.student,     key:'1'},

@@ -9,10 +9,7 @@ async function addBadge(username, badgeName, date) {
         },
         body: JSON.stringify({
             user: username,
-            badges: {
-                ...badges,
-                badgeName: true,
-            },
+            badges: badgeName,
             timestamp: date
         })
     })
@@ -23,4 +20,4 @@ async function addBadge(username, badgeName, date) {
     return response;
 }
 
-module.exports = addBadge();
+module.exports = addBadge;

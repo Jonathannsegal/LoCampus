@@ -11,7 +11,7 @@ const Docs = () => {
         <Container>
             <Text fontSize="5xl">COM S 309</Text>
             <Text fontSize="3xl">Team HV_10_LOCAMPUS</Text>
-            <NextLink href="/home" passHref>
+            <NextLink href="http://coms-309-hv-10.cs.iastate.edu:8080/swagger-ui.html" passHref>
                 <Link color="teal.500">Server side docs by Andrew Yunt</Link>
             </NextLink>
             <NextLink href="/frontenddocs" passHref>

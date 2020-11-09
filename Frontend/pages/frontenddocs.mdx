@@ -1,0 +1,523 @@
+
+# locampus API Documentation
+
+**version**: v1
+
+**baseUri**: http://hv_10.iastate.edu
+
+**protocols**: HTTP
+
+# GET /ping
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/ping"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "message" : "Pong"
+}
+
+```
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# POST /login
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X POST "http://hv_10.iastate.edu/login" \
+	-d @request_body
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "Username" : "username",
+  "Password" : "password"
+}
+
+```
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# POST /register
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X POST "http://hv_10.iastate.edu/register" \
+	-d @request_body
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "Email" : "email",
+  "Username" : "username",
+  "Password1" : "password",
+  "Password2" : "password"
+}
+
+```
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# GET /role/{userGuid}
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/role/{userGuid}"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "role" : "role"
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| userGuid | string  | true |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# GET /{userGuid}/bio
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/{userGuid}/bio"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "User profile" : "picture",
+  "text bio": "text",
+  "score" : "int",
+  "banner": "image",
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| userGuid | string  | true |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# GET /{userGuid}/badges
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/{userGuid}/badges"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "array of badges" : "[]"
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| userGuid | string  | true |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# GET /{userGuid}/badge/{badgeGuid}
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/{userGuid}/badge/{badgeGuid}"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "one badge" : "[]"
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| userGuid | string  | true |
+| badgeGuid | string  | true |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# GET /{userGuid}/posts
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/{userGuid}/posts"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "array of posts" : "[]"
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| userGuid | string  | true |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# GET /{userGuid}/post/{postGuid}
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/{userGuid}/post/{postGuid}"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "array of posts" : "[]"
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| userGuid | string  | true |
+| postGuid | string  | true |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# GET /{locationGuid}/bio
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/{locationGuid}/bio"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "Banner" : "image",
+  "Faculty" : "array of faculty",
+  "Students" : "array of students"
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| locationGuid | string  | true |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# GET /{locationGuid}/{locationGuid}/bio
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/{locationGuid}/{locationGuid}/bio"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "Banner" : "image",
+  "Faculty" : "array of faculty",
+  "Students" : "array of students"
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+|  |   |  |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# GET /{locationGuid}/posts
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/{locationGuid}/posts"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "all posts at this location"
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| locationGuid | string  | true |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# GET /{locationGuid}/{locationGuid}/posts
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X GET "http://hv_10.iastate.edu/{locationGuid}/{locationGuid}/posts"
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "all posts at this location"
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+|  |   |  |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# POST /post
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X POST "http://hv_10.iastate.edu/post" \
+	-d @request_body
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "post data stuff"
+}
+
+```
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# POST /{postGuid}/rate
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X POST "http://hv_10.iastate.edu/{postGuid}/rate" \
+	-d @request_body
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "rate post"
+}
+
+```
+
+***URI Parameters***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| postGuid | string  | true |
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# Types
+
+## TestType
+
+> **TYPE DEFINITION**
+
+```json
+{
+  "name": "TestType",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "name": "id",
+      "displayName": "id",
+      "typePropertyKind": "TYPE_EXPRESSION",
+      "required": true
+    },
+    "optional": {
+      "type": "string",
+      "name": "optional",
+      "displayName": "optional",
+      "typePropertyKind": "TYPE_EXPRESSION",
+      "required": false
+    },
+    "expanded": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number",
+          "name": "count",
+          "displayName": "count",
+          "typePropertyKind": "TYPE_EXPRESSION",
+          "required": true
+        }
+      },
+      "name": "expanded",
+      "displayName": "expanded",
+      "typePropertyKind": "TYPE_EXPRESSION",
+      "required": true,
+      "additionalProperties": true
+    }
+  }
+}
+```
+
+**Parent type:** object
+
+***Properties***
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| id | number  | true |
+| optional | string  | false |
+| expanded |[](#) | true |
+

@@ -3,8 +3,6 @@ package edu.iastate.locampus.post;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
@@ -18,7 +16,6 @@ public class PostController {
     private PostRepository postRepository;
 
     private final JsonParser parser = JsonParserFactory.getJsonParser();
-    private final Logger logger = LoggerFactory.getLogger(PostController.class);
 
     // @PreAuthorize("hasAuthority('POST_CREATE')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -55,17 +52,13 @@ public class PostController {
         } else if (direction.equals("down")) {
             post.setRank(post.getRank() - 1);
         }
-
-        // add logic to check if user is authenticated
     }
 
     // @PreAuthorize("hasAuthority('POST_LIST')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(method = RequestMethod.GET, path = "/post")
     public List<Post> getAllPosts() {
-        // logger.info("Entered into Controller Layer");
         List<Post> results = postRepository.findAll();
-        // logger.info("Number of Records Fetched:" + results.size());
         return results;
     }
 }

@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const initialState = {
   username: '',
+  bio: '',
   badges: {
     student: false,
     teacher: false,
@@ -33,6 +34,11 @@ const reducer = (state = { initialState, input: {} }, action) => {
           ...state.badges,
           [action.payload.badge]: action.payload.unlocked,
         },
+      };
+      case 'SET_BIO':
+      return {
+        ...state,
+        bio: action.payload.txt,
       };
     default:
       return state;

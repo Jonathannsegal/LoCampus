@@ -3,6 +3,8 @@ package edu.iastate.locampus.user;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import edu.iastate.locampus.Utils;
+import edu.iastate.locampus.role.Permission;
+import edu.iastate.locampus.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
@@ -34,6 +36,8 @@ public class UserController {
 
     private final JsonParser parser = JsonParserFactory.getJsonParser();
 
+    UserDetailsImpl userDetails = ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/register")
     public String createUser(@RequestBody User user) {
@@ -63,7 +67,7 @@ public class UserController {
         return objectNode;
     }
 
-    // @PreAuthorize("hasAuthority('USER_LIST')")
+    @PreAuthorize("hasAuthority('USER_LIST')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(method = RequestMethod.GET, path = "/user/list")
     public List<User> getAllUsers() {
@@ -75,6 +79,10 @@ public class UserController {
     @PostMapping("/user/{userId}/delete")
     @PreAuthorize("hasAuthority('USER_DELETE')")
     public void deleteUser(@PathVariable("userId") Integer userId) {
+        if (userId != userDetails.getId() && !Utils.hasPermission(userDetails, Permission.USER_DELETE_ANY)) {
+            return; // return if attempting to delete another user without permission
+        }
+
         userRepository.delete(userRepository.getOne(userId));
     }
 
@@ -110,6 +118,10 @@ public class UserController {
     @PostMapping("/user/{userId}/setbio")
     @PreAuthorize("hasAuthority('USER_SET_BIO')")
     public void setBio(@PathVariable("userId") Integer userId, @RequestBody String bio) {
+        if (userId != userDetails.getId() && !Utils.hasPermission(userDetails, Permission.USER_SET_BIO_ANY)) {
+            return;
+        }
+
         userRepository.getOne(userId).setBio((String) parser.parseMap(bio).get("bio"));
     }
 
@@ -135,6 +147,10 @@ public class UserController {
     @RequestMapping("/user/{followerid}/{followedid}")
     @PreAuthorize("hasAuthority('USER_SET_FOLLOWERS')")
     public void setFollower(@PathVariable("followerid") Integer followerId, @PathVariable("followedid") Integer followedId) {
+        if (followerId != userDetails.getId() && !Utils.hasPermission(userDetails, Permission.USER_SET_FOLLOWERS_ANY)) {
+            return;
+        }
+
         userRepository.getOne(followerId).addFollower(followedId);
         userRepository.getOne(followedId).addFollowedBy(followerId);
     }
@@ -143,6 +159,10 @@ public class UserController {
     @RequestMapping("/user/{requesteeeId}/requestfriend/{requestorId}")
     @PreAuthorize("hasAuthority('USER_REQUEST_FRIEND')")
     public void requestFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
+        if (requestorId != userDetails.getId() && !Utils.hasPermission(userDetails, Permission.USER_REQUEST_FRIEND_ANY)) {
+            return;
+        }
+
         userRepository.getOne(requesteeeId).addFriendRequest(requestorId);
     }
 
@@ -150,6 +170,10 @@ public class UserController {
     @RequestMapping("/user/{requesteeeId}/removerequestfriend/{requestorId}")
     @PreAuthorize("hasAuthority('USER_REM_REQUEST_FRIEND')")
     public void removeRequestFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
+        if (requesteeeId != userDetails.getId() && !Utils.hasPermission(userDetails, Permission.USER_REM_REQUEST_FRIEND_ANY)) {
+            return;
+        }
+
         userRepository.getOne(requesteeeId).removeFriendRequest(requestorId);
     }
 
@@ -157,6 +181,10 @@ public class UserController {
     @RequestMapping("/user/{requesteeeId}/addfriend/{requestorId}")
     @PreAuthorize("hasAuthority('USER_ADD_FRIEND')")
     public void addFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
+        if (requesteeeId != userDetails.getId() && !Utils.hasPermission(userDetails, Permission.USER_ADD_FRIEND_ANY)) {
+            return;
+        }
+
         User requestee = userRepository.getOne(requesteeeId);
         requestee.removeFriendRequest(requestorId);
         requestee.addFriend(requestorId);
@@ -164,8 +192,12 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user/{requesteeeId}/removefriend/{requestorId}")
-    @PreAuthorize("hasAuthority('USER_ACCEPT_FRIEND')")
-    public void acceptFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
+    @PreAuthorize("hasAuthority('USER_REMOVE_FRIEND')")
+    public void removeFriend(@PathVariable("requestorId") Integer requestorId, @PathVariable("requesteeeId") Integer requesteeeId) {
+        if (requesteeeId != userDetails.getId() && !Utils.hasPermission(userDetails, Permission.USER_REMOVE_FRIEND_ANY)) {
+            return;
+        }
+
         userRepository.getOne(requesteeeId).removeFriend(requestorId);
     }
 }

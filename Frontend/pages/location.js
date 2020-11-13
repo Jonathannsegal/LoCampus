@@ -33,11 +33,12 @@ const Location = ({coords}) => {
   const { badges, setBadge } = useLocation();
   const toast = useToast();
   const locations = locationMap;
+  const locationAccuracy = 0.0003;
 
   if(coords){
   const { latitude, longitude } = coords;
   locations.forEach(location => {
-    if(Math.abs(location.longitude - longitude) < 0.0003 && Math.abs(location.latitude - latitude) < 0.0003){
+    if(Math.abs(location.longitude - longitude) < locationAccuracy && Math.abs(location.latitude - latitude) < locationAccuracy){
       if(!badges.radar){
         setBadge('radar', true);
         toast({
@@ -76,7 +77,7 @@ const Location = ({coords}) => {
   type = "location"
 />
 <Flex display="block" width="100vw" h="60vh" bg="yellow.500">
-  <Map />
+  <Map mapStyle="mapbox://styles/mapbox/satellite-v9" geolocate="true"/>
 </Flex>
 
 </Container>

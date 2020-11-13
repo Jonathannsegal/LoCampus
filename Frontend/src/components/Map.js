@@ -11,9 +11,9 @@ class Map extends Component {
       viewport: {
         width: '100%',
         height: '100%',
-        latitude: 42.0266573,
-        longitude: -93.6456403,
-        zoom: 8,
+        latitude: 42.025417,
+        longitude: -93.646066,
+        zoom: 15,
       },
     };
   }
@@ -25,11 +25,12 @@ class Map extends Component {
     return (
       <MapGl
         {...this.state.viewport}
-        mapStyle="mapbox://styles/mapbox/satellite-v9"
+        mapStyle={this.props.mapStyle}
         mapboxApiAccessToken='pk.eyJ1IjoiYWRlaWNrIiwiYSI6ImNrZWVyeDR0dTAzNjYyd3BpNG95MnJtbmEifQ.EPFDghB0Ml_eeduUbERUlg'
         onViewportChange={(viewport) => this.setState({ viewport })}
       >
         <Pins data={LOCATIONS} onClick={this._onClickMarker} />
+        {(this.props.geolocate) ? 
         <GeolocateControl
           //fitBoundsOptions={{maxZoom: 17}}
           auto={true}
@@ -37,6 +38,9 @@ class Map extends Component {
           trackUserLocation={true}
           showUserLocation={true}
         />
+        : <></> //No Geolocate
+      }
+        
       </MapGl>
     );
   }

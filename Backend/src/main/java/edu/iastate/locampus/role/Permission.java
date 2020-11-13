@@ -24,7 +24,9 @@ public enum Permission {
 
     POST_CREATE,
     POST_DELETE,
+    POST_DELETE_ANY,
     POST_SET_CONTENT,
+    POST_SET_CONTENT_ANY,
     POST_RANK,
     POST_LIST,
 

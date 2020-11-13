@@ -14,7 +14,7 @@ export default (props) => {
     <>
       <Stack isInline spacing={2} pb={1} align="center">
 
-        <Flex flexShrink="0" px={"20%"} minW="100%" justifyContent="space-between">
+        <Flex flexShrink="0" px={"3%"} minW="100%" justifyContent="space-between">
           <Flex alignItems="center">
             <Avatar size="xs" name={props.name} />
             <Heading pl="1em" as="h6" size="xs">

@@ -116,7 +116,6 @@ const Container = ({ children }) => {
         bg={bgColor[colorMode]}
         color={primarytextColor[colorMode]}
         mt={8}
-        px={8}
         mb="2em"
       >
         {children}

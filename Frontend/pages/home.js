@@ -12,6 +12,7 @@ import {
   Flex,
   Image,
   FormErrorMessage,
+  useColorMode,
 } from '@chakra-ui/core';
 import getPosts from '../src/app/util/getPosts';
 import getUsers from '../src/app/util/getUsers';
@@ -33,6 +34,20 @@ const Home = () => {
   const { username } = useHome();
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
+  const { colorMode } = useColorMode();
+  const bgColor = {
+    light: 'gray.50',
+    dark: 'gray.900',
+  };
+  const altBgColor = {
+    light: 'gray.100',
+    dark: 'gray.800',
+  };
+  const textColor = {
+    light: 'gray.900',
+    dark: '#ffffff',
+  };
+
   useEffect(() => {
     getPosts().then(result => setPosts(result));
     getUsers().then(result => setUsers(result));
@@ -45,8 +60,8 @@ const Home = () => {
         borderRadius="8px 8px 8px 8px" 
         boxshadow="0 2px 4px rgba(0,0,0,0.3)"
         mb={4}
-        h="400px"
-        w="96%"
+        h="600px"
+        w="100%"
         top="72px"
         backgroundImage="url('https://gray-kcrg-prod.cdn.arcpublishing.com/resizer/IoH9DKKfRJvK3qhRQvQd0hUb7bM=/1200x400/smart/cloudfront-us-east-1.images.arcpublishing.com/gray/IWWIB3BCJRIR5DTJPZRIF3WZPY.jpg')"
         backgroundPosition="bottom"
@@ -55,10 +70,10 @@ const Home = () => {
         position="fixed"
       />
       <Box //Main Box
-        border="1px solid #E8EAED"
+        // border="1px solid #E8EAED"
         borderRadius="8px"
-        boxshadow="0 2px 4px rgba(0,0,0,0.3)"
-        bg="white"
+        // boxshadow="0 2px 4px rgba(0,0,0,0.3)"
+        bg={bgColor[colorMode]}
         color="black"
         position="absolute"
         w="50vw"
@@ -69,10 +84,10 @@ const Home = () => {
       >
         <Stack mb="4">
           <Box
-          border="1px solid #E8EAED"
+          // border="1px solid #E8EAED"
           borderRadius="8px"
-          boxshadow="0 2px 4px rgba(0,0,0,0.3)"
-          bg="gray.50"
+          // boxshadow="0 2px 4px rgba(0,0,0,0.3)"
+          bg={altBgColor[colorMode]}
           m={5}
           p={4}
           color="black"
@@ -88,14 +103,14 @@ const Home = () => {
             >
               {(props) => (
                 <form onSubmit={props.handleSubmit}>
-                  <Text fontSize="3xl">{username}</Text>
+                  <Text fontSize="3xl" color={textColor[colorMode]}>{username}</Text>
                   <Field name="content">
                     {({ field, form }) => (
                       <FormControl
                         isInvalid={form.errors.name && form.touched.name}
                       >
                         {/* <FormLabel htmlFor="content">Post</FormLabel> */}
-                        <Textarea
+                        <Textarea color={textColor[colorMode]}
                           {...field}
                           id="content"
                           placeholder="Write your post here!"
@@ -106,7 +121,7 @@ const Home = () => {
                       </FormControl>
                     )}
                   </Field>
-                  <Button variantColor="teal" type="submit" position="absolute" bottom={6} right={8}>
+                  <Button variantColor="teal" type="submit" position="absolute" bottom={6} right={8} zIndex={99}>
                     Post!
                   </Button>
                 </form>
@@ -130,22 +145,25 @@ const Home = () => {
         </Stack>
       </Box>
 
-      <Box //Friends Box
-        border="1px solid #E8EAED"
+      <Flex //Friends Box
         borderRadius="8px"
-        boxshadow="0 2px 4px rgba(0,0,0,0.3)"
-        bg="gray.50"
+        bg={bgColor[colorMode]}
         mb={4}
         color="black"
         position="absolute"
         w="20%"
         top="505px"
         right="2.5%"
+        justify="center"
+        px="0px"
       >
-        <Text fontSize="160%" p="11px">
-          People You May Know
-        </Text>
-        <Stack mt="4" mb="4">
+        
+        <Stack mt="4" mb="4" w="98%" >
+        <Flex w="100%" h="100%" justify="center">
+          <Text fontSize="160%" py="11px" color={textColor[colorMode]}> 
+            People You May Know
+          </Text>
+        </Flex>
           {users
             .map((c) => (
               <Friend
@@ -156,11 +174,11 @@ const Home = () => {
               />
             ))}
         </Stack>
-      </Box>
+      </Flex>
 
       <Flex //Location Box
       position="absolute" width="20vw" h="50vh" 
-      bg="gray.50" borderRadius="8px 8px 8px 8px"
+      bg={bgColor[colorMode]} borderRadius="8px 8px 8px 8px"
       top="550px" left="3%">
         <Stack alignItems="center">
           <Image src="https://www.brandmarketing.iastate.edu/wp-content/uploads/2015/10/primary1-red.png" 
@@ -168,7 +186,7 @@ const Home = () => {
           <Flex display="block" width="100%" h="40%" bg="yellow.500">
             <Map mapStyle="mapbox://styles/mapbox/streets-v11" geolocate={false}/>
           </Flex>
-          <Text color="black">
+          <Text color={textColor[colorMode]}>
             Ames, IA 50011
           </Text>        
         </Stack>

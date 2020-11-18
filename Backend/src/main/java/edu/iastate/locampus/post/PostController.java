@@ -39,9 +39,9 @@ public class PostController {
         postRepository.getOne(postId).setContent((String) parser.parseMap(content).get("content"));
     }
 
+    // @PreAuthorize("hasAuthority('POST_RANK')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/post/{postId}/rank")
-    @PreAuthorize("hasAuthority('POST_RANK')")
     public void rank(@PathVariable("postId") Integer postId, @RequestBody String content) {
         Map<String, Object> body = parser.parseMap(content);
         Post post = postRepository.getOne(postId);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   Box,
@@ -14,6 +14,10 @@ import { Spacer } from "@chakra-ui/react"
 import makeVote from '../../app/util/makeVote';
 
 const Post = (props) => {
+  const [rank, setRank] = useState(0);
+  useEffect(() => {
+    setRank(props.rating);
+  }, []);
 
   const { colorMode } = useColorMode();
   const textColor = {
@@ -24,22 +28,22 @@ const Post = (props) => {
   return (
     <>
       <Box borderWidth="1px" rounded="lg" p="15px">
-          <Flex flexShrink="0" minW="350px" justifyContent="space-between">
-            <Flex alignItems="center">
-              <Avatar size="xs" name={props.author} />
-              <Heading pl="1em" as="h6" size="xs" color={textColor[colorMode]}>
-                {props.author}
-              </Heading>
-            </Flex>
-            <Spacer />
-            <Flex>
-              <Stack isInline spacing={2} align="center">
-                <IconButton aria-label="upvote" icon="arrow-up" onClick={() => makeVote(props.key, "up")} color={textColor[colorMode]}/>
-                <Text>{props.rating}</Text>
-                <IconButton aria-label="downvote" icon="arrow-down" onClick={() => makeVote(props.key, "down")} color={textColor[colorMode]}/>
-              </Stack>
-            </Flex>
+        <Flex flexShrink="0" minW="350px" justifyContent="space-between">
+          <Flex alignItems="center">
+            <Avatar size="xs" name={props.author} />
+            <Heading pl="1em" as="h6" size="xs" color={textColor[colorMode]}>
+              {props.author}
+            </Heading>
           </Flex>
+          <Spacer />
+          <Flex>
+            <Stack isInline spacing={2} align="center">
+              <IconButton aria-label="upvote" icon="arrow-up" onClick={() => { makeVote(props.id, "up"); setRank(rank + 1) }} color={textColor[colorMode]} />
+              <Text>{rank}</Text>
+              <IconButton aria-label="downvote" icon="arrow-down" onClick={() => { makeVote(props.id, "down"); setRank(rank - 1) }} color={textColor[colorMode]} />
+            </Stack>
+          </Flex>
+        </Flex>
         <Divider />
         <Text color={textColor[colorMode]}>{props.content}</Text>
       </Box>

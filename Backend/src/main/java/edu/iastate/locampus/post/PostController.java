@@ -25,9 +25,9 @@ public class PostController {
         return post.toString();
     }
 
+    // @PreAuthorize("hasAuthority('POST_DELETE')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/post/{postId}/delete")
-    @PreAuthorize("hasAuthority('POST_DELETE')")
     public void deletePost(@PathVariable("postId") Integer postId) {
         postRepository.delete(postRepository.getOne(postId));
     }

@@ -49,15 +49,15 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getPosts().then(result => setPosts(result));
+    getPosts().then(result => { setPosts(result); console.log(result) });
     getUsers().then(result => setUsers(result));
   }, []);
 
   return ( //temp comment: 
-    <Container> 
+    <Container>
       <Box //background image
         //border="1px solid black"
-        borderRadius="8px 8px 8px 8px" 
+        borderRadius="8px 8px 8px 8px"
         boxshadow="0 2px 4px rgba(0,0,0,0.3)"
         mb={4}
         h="600px"
@@ -134,6 +134,7 @@ const Home = () => {
                 .sort((a, b) => b.timestamp - a.timestamp)
                 .map((c) => (
                   <Post
+                    id={c.id}
                     key={c.id}
                     author={c.author}
                     rating={c.rank}
@@ -181,19 +182,19 @@ const Home = () => {
       bg={bgColor[colorMode]} borderRadius="8px 8px 8px 8px"
       top="550px" left="3%">
         <Stack alignItems="center">
-          <Image src="https://www.brandmarketing.iastate.edu/wp-content/uploads/2015/10/primary1-red.png" 
-          w="100%" h="20%" mt="3%" display="block" objectFit="cover" position="relative"/>
+          <Image src="https://www.brandmarketing.iastate.edu/wp-content/uploads/2015/10/primary1-red.png"
+            w="100%" h="20%" mt="3%" display="block" objectFit="cover" position="relative" />
           <Flex display="block" width="100%" h="40%" bg="yellow.500">
-            <Map mapStyle="mapbox://styles/mapbox/streets-v11" geolocate={false}/>
+            <Map mapStyle="mapbox://styles/mapbox/streets-v11" geolocate={false} />
           </Flex>
           <Text color={textColor[colorMode]}>
             Ames, IA 50011
-          </Text>        
+          </Text>
         </Stack>
       </Flex>
-      
 
-      
+
+
     </Container>
   );
 };

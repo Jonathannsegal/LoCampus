@@ -43,18 +43,18 @@ export default (props) => {
                     justify="center"
                     margin="auto">
                     
-                    <StatGroup
+                    {/* <StatGroup
                     align="left">
                             <Stat>
                             <StatLabel>Followers</StatLabel>
                             <StatNumber>345,670</StatNumber>
                            
                             </Stat>
-                        </StatGroup> 
+                        </StatGroup>  */}
                     
-                        <Button leftIcon="check-circle" variantColor="green" variant="solid">
+                        {/* <Button leftIcon="check-circle" variantColor="green" variant="solid">
                                 Follow
-                            </Button>
+                            </Button> */}
                             <Divider orientation="vertical" />
                             <Divider orientation="vertical" />
                             <Divider orientation="vertical" />

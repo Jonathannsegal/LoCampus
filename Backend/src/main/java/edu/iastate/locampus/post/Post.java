@@ -1,24 +1,21 @@
 package edu.iastate.locampus.post;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.springframework.core.style.ToStringCreator;
 
-import java.util.UUID;
+import javax.persistence.*;
+// import java.util.UUID;
 
 @Entity
 @Table(name = "post")
 public class Post {
 
     @Id
-	@Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue
+    @Column(name = "id")
     @NotFound(action = NotFoundAction.IGNORE)
-    private UUID id = UUID.randomUUID();
+    private Integer id;
 
     @Column(name = "author")
     @NotFound(action = NotFoundAction.IGNORE)
@@ -36,15 +33,15 @@ public class Post {
     @NotFound(action = NotFoundAction.IGNORE)
     private String location;
 
-    @Column(name = "rank")
+    @Column(name = "`rank`")
     @NotFound(action = NotFoundAction.IGNORE)
-    private Integer rank;
+    private Integer rank = 0;
 
     public Post() {
         this.rank = 0;
     }
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 

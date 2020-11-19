@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { Flex, useColorMode } from '@chakra-ui/core';
+import { Flex, Text, useColorMode } from '@chakra-ui/core';
+import { Center, Square, Circle } from "@chakra-ui/react"
+
 import BadgeBox from '../components/BadgeBox';
 import { useSelector } from 'react-redux';
 import { withRedux } from '../lib/redux';
 import { useDispatch } from 'react-redux';
+
 
 
 
@@ -72,8 +75,11 @@ const BadgeCase = (props) => {
           
   return (
       <Flex bg={props.color} position={props.position} 
-      left={props.left} top={props.top} w={props.w} h={props.h}
+      left={props.left} top={props.top} w={props.w} h={props.h} right={props.right}
       wrap="wrap" justify="center" pt="30px" borderRadius={props.borderRadius}>
+          <Center w="100%">
+            <Text fontSize={["30px", "40px", "50px", "58px"]} color="gray.900">Badges</Text>
+          </Center>
           {badgeList}
       </Flex>
   );

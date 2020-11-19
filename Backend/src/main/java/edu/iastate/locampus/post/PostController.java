@@ -33,9 +33,9 @@ public class PostController {
         return post.toString();
     }
 
+    // @PreAuthorize("hasAuthority('POST_DELETE')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/post/{postId}/delete")
-    @PreAuthorize("hasAuthority('POST_DELETE')")
     public void deletePost(@PathVariable("postId") Integer postId) {
         Post post = postRepository.getOne(postId);
 
@@ -59,9 +59,9 @@ public class PostController {
         post.setContent((String) parser.parseMap(content).get("content"));
     }
 
+    // @PreAuthorize("hasAuthority('POST_RANK')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/post/{postId}/rank")
-    @PreAuthorize("hasAuthority('POST_RANK')")
     public void rank(@PathVariable("postId") Integer postId, @RequestBody String content) {
         Map<String, Object> body = parser.parseMap(content);
         Post post = postRepository.getOne(postId);
@@ -72,17 +72,13 @@ public class PostController {
         } else if (direction.equals("down")) {
             post.setRank(post.getRank() - 1);
         }
-
-        // add logic to check if user is authenticated
     }
 
     // @PreAuthorize("hasAuthority('POST_LIST')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(method = RequestMethod.GET, path = "/post")
     public List<Post> getAllPosts() {
-        // logger.info("Entered into Controller Layer");
         List<Post> results = postRepository.findAll();
-        // logger.info("Number of Records Fetched:" + results.size());
         return results;
     }
 }

@@ -25,23 +25,25 @@ const useContainer = () => {
 
   const dispatch = useDispatch();
   const setBadge = (badgeName, unlocked) =>
-      dispatch({
-          type: 'SET_BADGE',
-          payload: { badge: badgeName, unlocked: unlocked },
-      });
+    dispatch({
+      type: 'SET_BADGE',
+      payload: { badge: badgeName, unlocked: unlocked },
+    });
+  const UserLogout = () =>
+    dispatch({ type: 'USER_LOGOUT' });
 
-  const badges = useSelector((state) => ({...state.badges}));
-  return { badges, setBadge };
+  const badges = useSelector((state) => ({ ...state.badges }));
+  return { badges, setBadge, UserLogout };
 };
 
 const Container = ({ children }) => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { badges, setBadge } = useContainer();
+  const { badges, setBadge, UserLogout } = useContainer();
   const toast = useToast();
 
   const colorButtonClicked = () => {
     toggleColorMode();
-    if(!badges.daynight){
+    if (!badges.daynight) {
       setBadge('daynight', true);
       toast({
         title: "\"Night Owl\" Badge Earned!",
@@ -107,6 +109,11 @@ const Container = ({ children }) => {
               Home
             </Button>
           </NextLink>
+          <NextLink href="/" passHref>
+            <Button as="a" variant="ghost" onClick={() => UserLogout()}>
+              Logout
+            </Button>
+          </NextLink>
         </Box>
       </StickyNav>
       <Flex
@@ -116,7 +123,6 @@ const Container = ({ children }) => {
         bg={bgColor[colorMode]}
         color={primarytextColor[colorMode]}
         mt={8}
-        px={8}
         mb="2em"
       >
         {children}

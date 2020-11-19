@@ -1,16 +1,24 @@
 var io = require('socket.io-client');
 var socket = io.connect('http://localhost:3001', { reconnect: true });
 
-async function postSocket() {
-    socket.on('connect', function (socket) {
-        console.log('Connected!');
-    });
+// function postSocket() {
+console.log("hello");
 
-    const data = socket.on('message', data => {
-        return data;
-    });
+socket.on('connect', function (socket) {
+    console.log('Connected!');
+});
 
-    return data;
-}
+socket.on('message', data => {
+    console.log(data);
+    // return data;
+});
 
-module.exports = postSocket;
+    // const data = socket.on('message', data => {
+    //     console.log(data);
+    //     return data;
+    // });
+
+    // return data;
+// }
+
+// module.exports = postSocket;

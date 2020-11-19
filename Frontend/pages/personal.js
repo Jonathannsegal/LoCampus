@@ -10,10 +10,12 @@ import {
   Stack,
   Textarea 
 } from '@chakra-ui/core';
-import { Editable, EditableInput, EditablePreview, IconButton, ButtonGroup } from "@chakra-ui/react"
-import { EditIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons'
+import { Editable, EditableInput, EditablePreview, IconButton, ButtonGroup } from "@chakra-ui/react";
+import { EditIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons';
+import Post from '../src/components/Home/Post';
 
 
+import getUserPosts from '../src/app/util/getUserPosts';
 import { useSelector } from 'react-redux';
 import { withRedux } from '../src/lib/redux';
 import { useDispatch } from 'react-redux';
@@ -41,7 +43,7 @@ const usePersonal = () => {
   const badges = useSelector((state) => ({...state.badges}));
   const bio = useSelector((state) => state.bio);
   const username = useSelector((state) => state.username);
-  return { badges, bio, username, setBadge, setBio };
+  return { badges, username, setBadge };
 };
 
 function BioEditable() {
@@ -82,12 +84,16 @@ function BioEditable() {
 }
 
 const Personal = () => {
-  const { badges, setBadge} = usePersonal();
+
+  
+  const { badges, username, setBadge} = usePersonal();
   const toast = useToast();
   const [userBio, setUserBio] = useState("");
-  const handleChangeBio = event => setUserBio(event.target.value);
+  const [posts, setPosts] = useState([]);
+  //const handleChangeBio = event => setUserBio(event.target.value);
 
   useEffect(() => {
+    getUserPosts(username).then(result => setPosts(result));
     if(!badges.student){
       setBadge('student', true);
       toast({
@@ -128,8 +134,22 @@ const Personal = () => {
         </Stack>
       </Flex>
 
-      <Flex bg="gray.500" w={["30%","40%","50%", "60%"]} position="relative" h="2000px" justify="center" borderRadius="30px" border="5px solid black" p="2%">
-        <Text fontSize={["30px","30px","30px","40px"]} color="black">List of Posts</Text>
+      <Flex bg="gray.500" w={["30%","40%","50%", "60%"]} position="relative" justify="center" borderRadius="30px" border="5px solid black" p="2%">
+        <Stack w="100%" align="center">
+        <Text fontSize={["30px","30px","30px","40px"]} color="black">User Posts</Text>
+        <Stack maxW="600px" mt="4" spacing={4} shouldWrapChildren>
+              {posts
+                .sort((a, b) => b.timestamp - a.timestamp)
+                .map((c) => (
+                  <Post
+                    key={c.id}
+                    author={c.author}
+                    rating={c.rank}
+                    content={c.content}
+                  />
+                ))}
+        </Stack>
+        </Stack>
       </Flex>
 
       <BadgeCase

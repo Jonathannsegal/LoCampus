@@ -12,7 +12,7 @@ import { Spacer } from "@chakra-ui/react"
 import friend from '../../app/util/friend';
 import follow from '../../app/util/follow';
 
-const Friend = (props) => {
+export default (props) => {
   const { colorMode } = useColorMode();
   const [friendShow, setFriendShow] = useState(true);
   const [followShow, setFollowShow] = useState(true);
@@ -80,5 +80,3 @@ const Friend = (props) => {
     </>
   );
 };
-
-export default Friend;

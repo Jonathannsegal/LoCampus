@@ -35,10 +35,23 @@ const reducer = (state = { initialState, input: {} }, action) => {
           [action.payload.badge]: action.payload.unlocked,
         },
       };
-      case 'SET_BIO':
+    case 'SET_BIO':
       return {
         ...state,
         bio: action.payload.txt,
+      };
+    case 'USER_LOGOUT':
+      return {
+        ...state,
+        username: undefined,
+        bio: undefined,
+        badges: {
+          student: false,
+          teacher: false,
+          creditcard: false,
+          radar: false,
+          daynight: false,
+        }
       };
     default:
       return state;

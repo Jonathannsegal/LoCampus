@@ -84,14 +84,14 @@ const Home = () => {
       >
         <Stack mb="4">
           <Box
-            // border="1px solid #E8EAED"
-            borderRadius="8px"
-            // boxshadow="0 2px 4px rgba(0,0,0,0.3)"
-            bg={altBgColor[colorMode]}
-            m={5}
-            p={4}
-            color="black"
-            position="relative"
+          // border="1px solid #E8EAED"
+          borderRadius="8px"
+          // boxshadow="0 2px 4px rgba(0,0,0,0.3)"
+          bg={altBgColor[colorMode]}
+          m={5}
+          p={4}
+          color="black"
+          position="relative"
           >
             <Formik
               initialValues={{ author: username, content: '' }}
@@ -158,13 +158,13 @@ const Home = () => {
         justify="center"
         px="0px"
       >
-
+        
         <Stack mt="4" mb="4" w="98%" >
-          <Flex w="100%" h="100%" justify="center">
-            <Text fontSize="160%" py="11px" color={textColor[colorMode]}>
-              People You May Know
+        <Flex w="100%" h="100%" justify="center">
+          <Text fontSize="160%" py="11px" color={textColor[colorMode]}> 
+            People You May Know
           </Text>
-          </Flex>
+        </Flex>
           {users
             .map((c) => (
               <Friend
@@ -178,9 +178,9 @@ const Home = () => {
       </Flex>
 
       <Flex //Location Box
-        position="absolute" width="20vw" h="50vh"
-        bg={bgColor[colorMode]} borderRadius="8px 8px 8px 8px"
-        top="550px" left="3%">
+      position="absolute" width="20vw" h="50vh" 
+      bg={bgColor[colorMode]} borderRadius="8px 8px 8px 8px"
+      top="550px" left="3%">
         <Stack alignItems="center">
           <Image src="https://www.brandmarketing.iastate.edu/wp-content/uploads/2015/10/primary1-red.png"
             w="100%" h="20%" mt="3%" display="block" objectFit="cover" position="relative" />

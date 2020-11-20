@@ -521,3 +521,60 @@ curl -X POST "http://hv_10.iastate.edu/{postGuid}/rate" \
 | optional | string  | false |
 | expanded |[](#) | true |
 
+```
+
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# POST /login
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X POST "http://hv_10.iastate.edu/personal" \
+	-d @request_body
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "UserBio" : "bio"
+}
+
+```
+
+***Responses***
+
+| Status | Response model | Description |
+| ------ | -------------- | ----------- |
+| 200 | [](#) |
+
+# POST /login
+
+> **CURL EXAMPLE**
+
+```bash
+curl -X POST "http://hv_10.iastate.edu/personal" \
+	-d @request_body
+```
+
+> RESPONSE BODY
+
+>  *200*
+
+```json
+{
+  "userName" : "username",
+  "profilePic" : "picture",
+  "userBio" : "bio",
+  "banner": "image"
+}
+
+```

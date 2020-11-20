@@ -12,7 +12,27 @@ import { Spacer } from "@chakra-ui/react"
 import friend from '../../app/util/friend';
 import follow from '../../app/util/follow';
 
-export default (props) => {
+import { withRedux } from '../../lib/redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+
+const useFriend = () => {
+  
+  const dispatch = useDispatch();
+  const setBadge = (badgeName, unlocked) =>
+      dispatch({
+          type: 'SET_BADGE',
+          payload: { badge: badgeName, unlocked: unlocked },
+      });
+
+  const badges = useSelector((state) => ({...state.badges}));
+  return { badges, setBadge };
+};
+
+const Friend =  (props) => {
+  const { badges, setBadge } = useFriend();
+
   const { colorMode } = useColorMode();
   const [friendShow, setFriendShow] = useState(true);
   const [followShow, setFollowShow] = useState(true);
@@ -44,7 +64,7 @@ export default (props) => {
                     title: `Following ${props.name}`,
                     description: `You can now see posts from ${props.name}`,
                     status: "success",
-                    duration: 9000,
+                    duration: 2000,
                     isClosable: true,
                   });
                   setFriendShow(false);
@@ -62,10 +82,19 @@ export default (props) => {
                       title: `Friend Request sent to ${props.name}`,
                       description: `Waiting for ${props.name} to accept`,
                       status: "success",
-                      duration: 9000,
+                      duration: 2000,
                       isClosable: true,
                     })
                     setFollowShow(false);
+                    if(!badges.handshake){
+                      setBadge('handshake', true);
+                      toast({
+                        title: "\"Collaborator\" Badge Earned!",
+                        status: "success",
+                        duration: 3000,
+                        isClosable: true,
+                      })
+                    }
                   }}>Friend</Button>
               }
               {followShow == false &&
@@ -80,3 +109,4 @@ export default (props) => {
     </>
   );
 };
+export default withRedux(Friend);

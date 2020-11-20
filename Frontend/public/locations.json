@@ -1,3 +1,8 @@
 [
-    {"location":"Campanile","image":"https://upload.wikimedia.org/wikipedia/commons/7/70/ISU_campanile.jpg","latitude":42.025417,"longitude":-93.646066}
+    {"location":"Campanile","image":"https://upload.wikimedia.org/wikipedia/commons/7/70/ISU_campanile.jpg","latitude":42.025417,"longitude":-93.646066},
+    {"location":"Howe Hall","image":"https://fastly.4sqi.net/img/general/200x200/9342638_nEf378RH-hpymUUeH1cH2KFfUnv4Jg8XorBMD6b33QM.jpg", "latitude":42.02690931614713,"longitude":-93.6528329011323},
+    {"location":"Parks Library","image":"https://lh5.googleusercontent.com/p/AF1QipMYoFcpMBS3wmlsCYwyE-NelcKZF1q1HlSM62PI=w408-h306-k-no","latitude":42.02812190794272,"longitude":-93.6488152695349},
+    {"location":"Memorial Union","image":"https://lh5.googleusercontent.com/p/AF1QipORDkoqEuQw-qtFAIANDRDBUDWZ_6Vifc6gjvBO=w408-h306-k-no", "latitude":42.023643208524426,"longitude":-93.64594686684282},
+    {"location":"State Gym","image":"https://lh5.googleusercontent.com/p/AF1QipOTTWU0C9AT_jQlRy7z6OpL_ZEhP56yrJ_eH4jK=w408-h306-k-no","latitude":42.02407559521882,"longitude":-93.65379150624166},
+    {"location":"Hilton Coliseum","image":"https://lh5.googleusercontent.com/p/AF1QipNi0R9qxRFxb1a6p9RJkZKOBihLCzBZiXk1iZOm=w408-h306-k-no", "latitude":42.02114775248413,"longitude":-93.63487004239089}
 ]

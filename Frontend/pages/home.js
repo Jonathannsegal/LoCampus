@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Formik, Field } from 'formik';
 import {
   Box,
@@ -11,13 +10,18 @@ import {
   Text,
   Flex,
   Image,
+  useToast,
   FormErrorMessage,
   useColorMode,
 } from '@chakra-ui/core';
 import getPosts from '../src/app/util/getPosts';
 import getUsers from '../src/app/util/getUsers';
 import makePost from '../src/app/util/makePost';
+
 import { withRedux } from '../src/lib/redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 import Container from '../src/components/Shared/Container';
 import Post from '../src/components/Home/Post';
 import Friend from '../src/components/Home/Friend';
@@ -27,11 +31,20 @@ import Map from '../src/components/Map';
 
 const useHome = () => {
   const username = useSelector((state) => state.username);
-  return { username };
+  const dispatch = useDispatch();
+  const setBadge = (badgeName, unlocked) =>
+      dispatch({
+          type: 'SET_BADGE',
+          payload: { badge: badgeName, unlocked: unlocked },
+      });
+
+  const badges = useSelector((state) => ({...state.badges}));
+  return { username, badges, setBadge };
 };
 
 const Home = () => {
-  const { username } = useHome();
+  const { username, badges, setBadge } = useHome();
+  const toast = useToast();
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const { colorMode } = useColorMode();
@@ -60,7 +73,7 @@ const Home = () => {
         borderRadius="8px 8px 8px 8px"
         boxshadow="0 2px 4px rgba(0,0,0,0.3)"
         mb={4}
-        h="600px"
+        h="400px"
         w="100%"
         top="72px"
         backgroundImage="url('https://gray-kcrg-prod.cdn.arcpublishing.com/resizer/IoH9DKKfRJvK3qhRQvQd0hUb7bM=/1200x400/smart/cloudfront-us-east-1.images.arcpublishing.com/gray/IWWIB3BCJRIR5DTJPZRIF3WZPY.jpg')"
@@ -102,7 +115,19 @@ const Home = () => {
               }}
             >
               {(props) => (
-                <form onSubmit={props.handleSubmit}>
+                <form onSubmit={() =>{
+                  props.handleSubmit();
+
+                  if(!badges.pencil){
+                    setBadge('pencil', true);
+                    toast({
+                      title: "\"Writer\" Badge Earned!",
+                      status: "success",
+                      duration: 3000,
+                      isClosable: true,
+                    })
+                  }
+                }}>
                   <Text fontSize="3xl" color={textColor[colorMode]}>{username}</Text>
                   <Field name="content">
                     {({ field, form }) => (
@@ -161,19 +186,19 @@ const Home = () => {
         
         <Stack mt="4" mb="4" w="98%" >
         <Flex w="100%" h="100%" justify="center">
-          <Text fontSize="160%" py="11px" color={textColor[colorMode]}> 
+          <Text fontSize="150%" py="11px" color={textColor[colorMode]}> 
             People You May Know
           </Text>
         </Flex>
           {users
-            .map((c) => (
+            .map((c) =>
               <Friend
                 id={c.id}
                 me={1}
                 name={c.name}
                 key={c.id}
               />
-            ))}
+            )}
         </Stack>
       </Flex>
 

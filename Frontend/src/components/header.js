@@ -31,7 +31,7 @@ export default (props) => {
                     bg={props.color}
                     flexDirection="column"
                 >
-                    <Flex height="150px">
+                    <Flex height="40px">
                         <Image
                             src={props.image}
                             objectFit="cover"

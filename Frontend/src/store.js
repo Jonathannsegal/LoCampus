@@ -7,11 +7,15 @@ const initialState = {
   username: '',
   bio: '',
   badges: {
-    student: false,
-    teacher: false,
-    creditcard: false,
-    radar: false,
     daynight: false,
+    engineering: false,
+    handshake: false,
+    partycone: false,
+    pencil: false,
+    radar: false,
+    student: false,
+    studying: false,
+    virus: false,
   }
 };
 

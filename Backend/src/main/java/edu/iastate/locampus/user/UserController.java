@@ -35,8 +35,7 @@ public class UserController {
     private PasswordEncoder encoder;
 
     private final JsonParser parser = JsonParserFactory.getJsonParser();
-
-    UserDetailsImpl userDetails = ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    private final UserDetailsImpl userDetails = ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/user/register")
@@ -112,6 +111,17 @@ public class UserController {
         ObjectNode objectNode = objectMapper.createObjectNode();
         objectNode.set("badges", objectMapper.valueToTree(userRepository.getOne(userId).getBadges()));
         return objectNode;
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping("/user/{userid}/addbadge/{badge}")
+    @PreAuthorize("hasAuthority('USER_ADD_BADGE')")
+    public void addBadge(@PathVariable("userId") Integer userId, @PathVariable("badge") String badge) {
+        if (userId != userDetails.getId() && !Utils.hasPermission(userDetails, Permission.USER_ADD_BADGE_ANY)) {
+            return;
+        }
+
+        userRepository.getOne(userId).getBadges().add(badge);
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")

@@ -19,7 +19,7 @@ public class Post {
 
     @Column(name = "author")
     @NotFound(action = NotFoundAction.IGNORE)
-    private Integer author;
+    private String author;
 
     @Column(name = "timestamp")
     @NotFound(action = NotFoundAction.IGNORE)
@@ -45,11 +45,11 @@ public class Post {
         return id;
     }
 
-    public Integer getAuthor() {
+    public String getAuthor() {
         return this.author;
     }
 
-    public void setAuthor(Integer author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 

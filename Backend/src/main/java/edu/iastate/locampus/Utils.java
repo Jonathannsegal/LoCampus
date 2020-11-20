@@ -1,6 +1,5 @@
 package edu.iastate.locampus;
 
-import edu.iastate.locampus.role.Permission;
 import edu.iastate.locampus.security.UserDetailsImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -30,9 +29,5 @@ public class Utils {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    public static boolean hasPermission(UserDetailsImpl userDetails, Permission permission) {
-        return userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals(permission.toString()));
     }
 }

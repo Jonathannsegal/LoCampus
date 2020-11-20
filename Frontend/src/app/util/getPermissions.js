@@ -1,14 +1,13 @@
 const fetch = require('isomorphic-fetch');
 
-async function roleCreate(name, permissions) {
-    const response = await fetch('http://coms-309-hv-10.cs.iastate.edu:8080/user/role/create', {
+async function getPermisions(permissions) {
+    const response = await fetch('http://coms-309-hv-10.cs.iastate.edu:8080/user/role/{roleId}/permissions', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            name: name,
             permissions: permissions
         })
     })
@@ -19,4 +18,4 @@ async function roleCreate(name, permissions) {
     return response;
 }
 
-module.exports = roleCreate;
+module.exports = getPermisions;

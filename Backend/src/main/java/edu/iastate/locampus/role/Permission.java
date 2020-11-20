@@ -7,6 +7,8 @@ public enum Permission {
     USER_EXISTS,
     USER_GET_ROLES,
     USER_GET_BADGES,
+    USER_ADD_BADGE,
+    USER_ADD_BADGE_ANY,
     USER_SET_BIO,
     USER_SET_BIO_ANY,
     USER_GET_BIO,

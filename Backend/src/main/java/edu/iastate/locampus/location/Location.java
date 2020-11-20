@@ -1,11 +1,9 @@
 package edu.iastate.locampus.location;
 
-import edu.iastate.locampus.util.IntegerSetConverter;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -24,13 +22,7 @@ public class Location {
 
     @Column(name = "posts")
     @NotFound(action = NotFoundAction.IGNORE)
-    @Convert(converter = IntegerSetConverter.class)
-    private Set<Integer> posts;
-
-    @Column(name = "staff")
-    @NotFound(action = NotFoundAction.IGNORE)
-    @Convert(converter = IntegerSetConverter.class)
-    private Set<Integer> staff;
+    private Integer[] posts;
 
     public UUID getId() {
         return id;
@@ -40,11 +32,7 @@ public class Location {
         return bio;
     }
 
-    public Set<Integer> getPosts() {
+    public Integer[] getPosts() {
         return posts;
-    }
-
-    public Set<Integer> getStaff() {
-        return staff;
     }
 }

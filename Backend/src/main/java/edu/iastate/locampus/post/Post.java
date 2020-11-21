@@ -19,7 +19,7 @@ public class Post {
 
     @Column(name = "author")
     @NotFound(action = NotFoundAction.IGNORE)
-    private String author;
+    private Integer author;
 
     @Column(name = "timestamp")
     @NotFound(action = NotFoundAction.IGNORE)
@@ -45,11 +45,11 @@ public class Post {
         return id;
     }
 
-    public String getAuthor() {
+    public Integer getAuthor() {
         return this.author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Integer author) {
         this.author = author;
     }
 
@@ -82,6 +82,14 @@ public class Post {
     }
 
     public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public Post(Integer author, String timestamp, String content, String location, Integer rank) {
+        this.author = author;
+        this.timestamp = timestamp;
+        this.content = content;
+        this.location = location;
         this.rank = rank;
     }
 

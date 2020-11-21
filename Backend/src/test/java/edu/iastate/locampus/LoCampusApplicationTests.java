@@ -1,5 +1,7 @@
 package edu.iastate.locampus;
 
+import edu.iastate.locampus.location.Location;
+import edu.iastate.locampus.location.LocationRepository;
 import edu.iastate.locampus.post.Post;
 import edu.iastate.locampus.post.PostRepository;
 import edu.iastate.locampus.role.Role;
@@ -26,6 +28,9 @@ class LoCampusApplicationTests {
 
 	@MockBean
 	private RoleRepository roleRepository;
+
+	@MockBean
+	private LocationRepository locationRepository;
 
 	@Test
 	void contextLoads() {
@@ -79,5 +84,37 @@ class LoCampusApplicationTests {
 		assertEquals("testpass", list.get(0).getVerify());
 
 		assertEquals(2, list.size());
+	}
+
+	//Andrew Yunt
+	@Test
+	public void testPostAttributes() {
+		List<Post> list = new ArrayList<Post>();
+
+		Post postOne = new Post(1, "973728000", "This is a test post.", "Iowa State University", 95);
+		Post postTwo = new Post(1, "1604880000", "Content for another test post.", "Iowa State University", 38);
+
+		list.add(postOne);
+		list.add(postTwo);
+
+		assertEquals(1, list.get(0).getAuthor());
+		assertEquals("973728000", list.get(0).getTimestamp());
+		assertEquals("This is a test post.", list.get(0).getContent());
+		assertEquals("Iowa State University", list.get(0).getLocation());
+		assertEquals(95, list.get(0).getRank());
+
+		assertEquals(2, list.size());
+	}
+
+	//Andrew Yunt
+	@Test
+	public void findAllLocatiosTest() {
+		List<Location> locations = new ArrayList<>();
+		Location locationOne = new Location();
+		Location locationTwo = new Location();
+		locations.add(locationOne);
+		locations.add(locationTwo);
+		when(locationRepository.findAll()).thenReturn(locations);
+		assertEquals(2, locations.size());
 	}
 }

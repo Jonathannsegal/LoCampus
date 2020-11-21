@@ -52,6 +52,11 @@ public class User {
     @Convert(converter = IntegerSetConverter.class)
     private Set<Integer> posts;
 
+    @Column(name = "rankedPosts")
+    @NotFound(action = NotFoundAction.IGNORE)
+    @Convert(converter = IntegerSetConverter.class)
+    private Set<Integer> rankedPosts;
+
     @Column(name = "followers")
     @NotFound(action = NotFoundAction.IGNORE)
     @Convert(converter = IntegerSetConverter.class)
@@ -144,6 +149,10 @@ public class User {
 
     public Set<Integer> getPosts() {
         return posts;
+    }
+
+    public Set<Integer> getRankedPosts() {
+        return rankedPosts;
     }
 
     public boolean addFollower(Integer followerId) {

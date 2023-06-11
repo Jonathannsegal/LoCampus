@@ -1,6 +1,6 @@
 # HV_10
 
-![Logo](https://drive.google.com/uc?id=1JBQm5fDz63FCYrqz2NNXzW_xG_GpicXi)
+![Logo](https://drive.google.com/uc?id=1-5tfqbBIhZAxbEzgKIQGCKMEx7RdY_dS)
 
 # Table of Contents
 

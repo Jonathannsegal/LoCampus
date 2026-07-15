@@ -1,4 +1,5 @@
 import React, { useEffect, useState} from 'react';
+import dynamic from 'next/dynamic';
 import {
   Box,
   Heading,
@@ -21,10 +22,11 @@ import { withRedux } from '../src/lib/redux';
 import { useDispatch } from 'react-redux';
 
 import { GiPoliceBadge } from 'react-icons/gi';
-import BadgeCase from '../src/components/BadgeCase';
 import PersonalHeading from '../src/components/PersonalHeading';
 import Container from '../src/components/Shared/Container';
 //import Searchbar from '../src/components/Shared/searchbar'
+
+const BadgeCase = dynamic(() => import('../src/components/BadgeCase'), { ssr: false });
 
 const usePersonal = () => {
 

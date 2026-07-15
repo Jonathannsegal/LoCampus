@@ -1,7 +1,14 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { composeWithDevTools } from 'redux-devtools-extension';
+
+const noopStorage = {
+  getItem: async () => null,
+  setItem: async (_key, value) => value,
+  removeItem: async () => undefined,
+};
+const storage = typeof window === 'undefined'
+  ? noopStorage
+  : require('redux-persist/lib/storage').default;
 
 const initialState = {
   username: '',
@@ -64,9 +71,9 @@ const reducer = (state = { initialState, input: {} }, action) => {
 
 const persistedReducer = persistReducer(persistConfig, reducer)
 
-const composeEnhancers = composeWithDevTools({
-  trace: true,
-});
+const composeEnhancers = typeof window === 'undefined'
+  ? compose
+  : require('redux-devtools-extension').composeWithDevTools({ trace: true });
 
 // const initializeStore = (preloadedState = initialState) => {
 //   return createStore(

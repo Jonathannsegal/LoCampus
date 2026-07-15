@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Lottie from 'react-lottie';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 
 class GenericLottie extends Component {

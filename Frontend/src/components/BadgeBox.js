@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import dynamic from 'next/dynamic';
 import { Flex, Tooltip, Image } from '@chakra-ui/core';
-import GenericLottie from './GenericLottie';
+
+const GenericLottie = dynamic(() => import('./GenericLottie'), { ssr: false });
 
 class BadgeBox extends Component {
   constructor(props) {

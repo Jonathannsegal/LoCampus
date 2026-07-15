@@ -1,8 +1,10 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { Box, Text } from '@chakra-ui/core';
 // import Sidebar from '../src/components/Sidebar';
-import BadgeCase from '../src/components/BadgeCase';
 import Container from '../src/components/Shared/Container';
+
+const BadgeCase = dynamic(() => import('../src/components/BadgeCase'), { ssr: false });
 
 const Badges = () => (
   <Container>

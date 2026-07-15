@@ -88,12 +88,12 @@ curl -X POST "http://hv_10.iastate.edu/register" \
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# GET /role/{userGuid}
+# GET /role/&#123;userGuid&#125;
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X GET "http://hv_10.iastate.edu/role/{userGuid}"
+curl -X GET "http://hv_10.iastate.edu/role/&#123;userGuid&#125;"
 ```
 
 > RESPONSE BODY
@@ -119,12 +119,12 @@ curl -X GET "http://hv_10.iastate.edu/role/{userGuid}"
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# GET /{userGuid}/bio
+# GET /&#123;userGuid&#125;/bio
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X GET "http://hv_10.iastate.edu/{userGuid}/bio"
+curl -X GET "http://hv_10.iastate.edu/&#123;userGuid&#125;/bio"
 ```
 
 > RESPONSE BODY
@@ -153,12 +153,12 @@ curl -X GET "http://hv_10.iastate.edu/{userGuid}/bio"
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# GET /{userGuid}/badges
+# GET /&#123;userGuid&#125;/badges
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X GET "http://hv_10.iastate.edu/{userGuid}/badges"
+curl -X GET "http://hv_10.iastate.edu/&#123;userGuid&#125;/badges"
 ```
 
 > RESPONSE BODY
@@ -184,12 +184,12 @@ curl -X GET "http://hv_10.iastate.edu/{userGuid}/badges"
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# GET /{userGuid}/badge/{badgeGuid}
+# GET /&#123;userGuid&#125;/badge/&#123;badgeGuid&#125;
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X GET "http://hv_10.iastate.edu/{userGuid}/badge/{badgeGuid}"
+curl -X GET "http://hv_10.iastate.edu/&#123;userGuid&#125;/badge/&#123;badgeGuid&#125;"
 ```
 
 > RESPONSE BODY
@@ -216,12 +216,12 @@ curl -X GET "http://hv_10.iastate.edu/{userGuid}/badge/{badgeGuid}"
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# GET /{userGuid}/posts
+# GET /&#123;userGuid&#125;/posts
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X GET "http://hv_10.iastate.edu/{userGuid}/posts"
+curl -X GET "http://hv_10.iastate.edu/&#123;userGuid&#125;/posts"
 ```
 
 > RESPONSE BODY
@@ -247,12 +247,12 @@ curl -X GET "http://hv_10.iastate.edu/{userGuid}/posts"
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# GET /{userGuid}/post/{postGuid}
+# GET /&#123;userGuid&#125;/post/&#123;postGuid&#125;
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X GET "http://hv_10.iastate.edu/{userGuid}/post/{postGuid}"
+curl -X GET "http://hv_10.iastate.edu/&#123;userGuid&#125;/post/&#123;postGuid&#125;"
 ```
 
 > RESPONSE BODY
@@ -279,12 +279,12 @@ curl -X GET "http://hv_10.iastate.edu/{userGuid}/post/{postGuid}"
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# GET /{locationGuid}/bio
+# GET /&#123;locationGuid&#125;/bio
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X GET "http://hv_10.iastate.edu/{locationGuid}/bio"
+curl -X GET "http://hv_10.iastate.edu/&#123;locationGuid&#125;/bio"
 ```
 
 > RESPONSE BODY
@@ -312,12 +312,12 @@ curl -X GET "http://hv_10.iastate.edu/{locationGuid}/bio"
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# GET /{locationGuid}/{locationGuid}/bio
+# GET /&#123;locationGuid&#125;/&#123;locationGuid&#125;/bio
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X GET "http://hv_10.iastate.edu/{locationGuid}/{locationGuid}/bio"
+curl -X GET "http://hv_10.iastate.edu/&#123;locationGuid&#125;/&#123;locationGuid&#125;/bio"
 ```
 
 > RESPONSE BODY
@@ -345,12 +345,12 @@ curl -X GET "http://hv_10.iastate.edu/{locationGuid}/{locationGuid}/bio"
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# GET /{locationGuid}/posts
+# GET /&#123;locationGuid&#125;/posts
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X GET "http://hv_10.iastate.edu/{locationGuid}/posts"
+curl -X GET "http://hv_10.iastate.edu/&#123;locationGuid&#125;/posts"
 ```
 
 > RESPONSE BODY
@@ -376,12 +376,12 @@ curl -X GET "http://hv_10.iastate.edu/{locationGuid}/posts"
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# GET /{locationGuid}/{locationGuid}/posts
+# GET /&#123;locationGuid&#125;/&#123;locationGuid&#125;/posts
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X GET "http://hv_10.iastate.edu/{locationGuid}/{locationGuid}/posts"
+curl -X GET "http://hv_10.iastate.edu/&#123;locationGuid&#125;/&#123;locationGuid&#125;/posts"
 ```
 
 > RESPONSE BODY
@@ -433,12 +433,12 @@ curl -X POST "http://hv_10.iastate.edu/post" \
 | ------ | -------------- | ----------- |
 | 200 | [](#) |
 
-# POST /{postGuid}/rate
+# POST /&#123;postGuid&#125;/rate
 
 > **CURL EXAMPLE**
 
 ```bash
-curl -X POST "http://hv_10.iastate.edu/{postGuid}/rate" \
+curl -X POST "http://hv_10.iastate.edu/&#123;postGuid&#125;/rate" \
 	-d @request_body
 ```
 

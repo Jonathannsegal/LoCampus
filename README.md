@@ -1,4 +1,6 @@
-# HV_10
+# LoCampus
+
+LoCampus is a campus-location web application with a React frontend and a Spring Boot/SQL backend.
 
 ![Logo](https://drive.google.com/uc?id=1-5tfqbBIhZAxbEzgKIQGCKMEx7RdY_dS)
 
@@ -10,16 +12,16 @@
 
 ## Front End [___Go to___](./Frontend)
 
-The front end of the project, this includes the public facing page as well as the admin application
+The frontend includes the public-facing site and the administration application.
 
 ## Back End [___Go to___](./Backend)
 
-The back end of the project, this includes SQL, Rest API, and corresponding services
+The backend includes the SQL schema, REST API, and supporting services.
 
 ## Run Local [___Go to___](./Documents/RUNLOCAL.md)
 
-This is a walkthough on how to set up local enviorment variables and run the project locally
+This walkthrough explains how to configure local environment variables and run the project.
 
 ## API Reference [___Go to___](./Documents/APIREFERENCE.md)
 
-The reference that we will use to build out our API in Springboot for the backend
+The API reference documents the Spring Boot backend.
